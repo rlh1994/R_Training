@@ -1,0 +1,76 @@
+---
+title: "Tutorial"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Quiz
+
+*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
+
+Some questions to verify that you understand some of the basics of R:
+
+```{r quiz}
+quiz(
+  question("What is output of the code `
+a <- c(1, 4, 5, 60, 9, 0)
+a[4]`",
+    answer("NA"),
+    answer("5"),
+    answer("60", correct = TRUE),
+    answer("1")
+  ),
+  question("What does the `na.rm` parameter do in the `mean()` function?",
+    answer("Removes any NAs from the calculation", correct = TRUE),
+    answer("Removes any NAs from the argument permenantly"),
+    answer("Returns nothing if the function would have returned NA")
+  ),
+  question("How can I get help while using R? (Select all that apply)",
+    answer("Press F1 when the cursor is within a function name", correct = TRUE),
+    answer("Search in the help window", correct = TRUE),
+    answer("Ask Ryan without having tried all correct options first"),
+    answer("Type `?` followed by the function name", correct = TRUE),
+    answer("Google R followed by your function and what you are trying to do", correct = TRUE)
+  ),
+  question("What type will the vector `c(TRUE, 8, 9.02431, FALSE, 001, NA)` be?",
+    answer("Boolean"),
+    answer("Character"),
+    answer("A mix of types"),
+    answer("Numeric", correct = TRUE)
+  ),
+question("What is the final value of z in the following code?
+`y <- 7
+Y <- 9
+z <- y*10
+z <- z/5
+",
+    answer("90"),
+    answer("14", correct = TRUE),
+    answer("18"),
+    answer("70")
+  ),
+  question("If I asked you create a vector of numbers starting from 13, ending at 190, in steps of 17, what function would you use to do it?",
+    answer("`length()`"),
+    answer("`seq()`", correct = TRUE),
+    answer("`c()`")
+  ),
+  question("What is wrong with the following code?
+`cnt <- 1
+while (count != 10){
+  print(paste('Count is now', cnt))
+  cnt <- cnt + 2
+}`",
+    answer("Cnt is spelt wrong, it should be count"),
+    answer("We should use for loop instead"),
+    answer("The loop will never stop", correct = TRUE, message = "Why is this the case?"),
+    answer("Count is capitalised in the sentance but cnt isn't")
+  )
+)
+```
+
