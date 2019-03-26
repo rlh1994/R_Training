@@ -1,0 +1,57 @@
+---
+title: "An aside on statistical summaries"
+author: "Ryan Hill"
+date: "23 March 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(datasauRus)
+library(ggplot2)
+library(gganimate)
+library(dplyr)
+```
+
+## The Data
+
+We have 13 datasets, each with 142 datapoints with an x and y coordinate. We might want to quickly analyse this data, say get the mean and standard deviation of each dataset?
+
+```{r analyse}
+datasaurus_dozen %>% 
+  group_by(dataset) %>%
+  summarise(mnx = mean(x), 
+            sdx = sd(x),
+            mny = mean(y), 
+            sdy = sd(y))
+```
+
+Wow that's amazing! All of our datasets have the exact same mean and standard deviation (to 2 decimal places anyway). We can even add in the correlation to see how well correlated the x and y are for each dataset:
+
+
+```{r analyse2}
+datasaurus_dozen %>% 
+  group_by(dataset) %>%
+  summarise(cor = cor(x, y))
+```
+
+## Plotting the data
+
+Okay so they seem pretty similar overall. But let's plot the data and see just how similar they are...
+
+```{r pressure, echo=FALSE}
+ggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset)) + 
+  geom_point() + 
+  facet_wrap(~dataset) +
+  theme(legend.position = "none")
+```
+
+It turns out they aren't similar at all! All 13 of the datasets are completely different and show a completely different "relationship" to each other. This is why it's always useful and important to visualize and understand the data rather than just blindly follow the numbers.
+
+```{r ani, echo = FALSE}
+ggplot(datasaurus_dozen, aes(x=x, y=y))+
+  geom_point()+
+  theme_minimal() +
+  transition_states(dataset, 3, 1) + 
+  ease_aes('cubic-in-out')
+```
