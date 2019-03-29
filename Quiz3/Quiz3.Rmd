@@ -1,74 +1,85 @@
 ---
-title: "Tutorial"
+title: "Dplyr Part 2"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
 library(learnr)
+library(ggplot2)
+library(dplyr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-## Topic 1
-
-### Exercise 
-
-*Here's a simple exercise with an empty code chunk provided for entering the answer.*
-
-Write the R code required to add two plus two:
-
-```{r two-plus-two, exercise=TRUE}
-
-```
-
-### Exercise with Code
-
-*Here's an exercise with some prepopulated code as well as `exercise.lines = 5` to provide a bit more initial room to work.*
-
-Now write a function that adds any two numbers and then call it:
-
-```{r add-function, exercise=TRUE, exercise.lines = 5}
-add <- function() {
-  
-}
-```
-
-## Topic 2
-
-### Exercise with Hint
-
-*Here's an exercise where the chunk is pre-evaulated via the `exercise.eval` option (so the user can see the default output we'd like them to customize). We also add a "hint" to the correct solution via the chunk immediate below labeled `print-limit-hint`.*
-
-Modify the following code to limit the number of rows printed to 5:
-
-```{r print-limit, exercise=TRUE, exercise.eval=TRUE}
-mtcars
-```
-
-```{r print-limit-hint}
-head(mtcars)
-```
-
 ### Quiz
 
-*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
-
-Some questions to verify that you understand the purposes of various base and recommended R packages:
+Some questions to verify that you understand some of the first half of the dplyr training:
 
 ```{r quiz}
 quiz(
-  question("Which package contains functions for installing other R packages?",
-    answer("base"),
-    answer("tools"),
-    answer("utils", correct = TRUE),
-    answer("codetools")
+  question("The `mutate` function does which of the following? (select all that apply)",
+    answer("Allows you to modify current columns", correct = TRUE),
+    answer("Allows you to create new columns based on current columns", correct = TRUE),
+    answer("Allows you to create new columns based on new columns you have just created", correct = TRUE),
+    answer("Allows you to rename columns")
   ),
-  question("Which of the R packages listed below are used to create plots?",
-    answer("lattice", correct = TRUE),
-    answer("tools"),
-    answer("stats"),
-    answer("grid", correct = TRUE)
+  question("What function would you use in a `mutate` to create a column based on a conditional statement",
+    answer("`if_else()`", correct = TRUE),
+    answer("`if(), else if(), else()`"),
+    answer("`condition()`"),
+    answer("`cases()`", correct = TRUE)
+  ),
+  question("A dataframe, `df1` is created with 1 column (col1) and 5 rows, populated with the numbers 1-5.
+The following code is then run. What are the values in col4?
+`
+df1 %>% mutate(col2 = -col1,
+                col3 = 2 * col2,
+                col4 = -3 * col3)`",
+    answer("6, 12, 18, 24, 30", correct = TRUE),
+    answer("-6, -12, -18, -24, -30"),
+    answer("5, 10, 15, 20, 25"),
+    answer("-5, -10, -15, -20, -25")
+  ),
+  question("Sarah has a sales dataframe (df1) with 5 columns; day_of_week, month, transaction_ID, transaction_price, number_of_items, and wants to find the mean and standard deviation of the average price per item for each transaction, per day and month. Which code should she use?",
+    answer("`df1 %>% group_by(month, day_of_week) %>% 
+           mutate(cost_per_item = transaction_price/number_of_items) %>%
+           summarise(mn = mean(cost_per_item), sd = sd(cost_per_item))`", correct = TRUE),
+    answer("`df1 %>% group_by(month, day_of_week) %>% 
+           mutate(cost_per_item = transaction_price/number_of_items,
+           mn = mean(cost_per_item), sd = sd(cost_per_item))`"),
+    answer("`df1 %>% group_by(month) %>% group_by(day_of_week) %>% 
+           mutate(cost_per_item = transaction_price/number_of_items) %>%
+           summarise(mn = mean(cost_per_item), sd = sd(cost_per_item))`"),
+    answer("`df1 %>% group_by(month) %>% group_by(day_of_week) %>% 
+           mutate(cost_per_item = transaction_price/number_of_items,
+           mn = mean(cost_per_item), sd = sd(cost_per_item))`")
+  ),
+question("Simon has been asked to find any outliers in each month in the same dataset, we class an outlier as any sale that has a price more than 3 standard deviatons away from the mean (in either direction), or has a number of items more than 3 sd away from the mean (in either direction). Which code should he use?",
+    answer("`df1 %>% group_by(month) %>% 
+mutate(mn_tp = mean(transaction_price), sd_tp = sd(transaction_price),
+ms_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
+filter(transaction_price < mn_tp - 3*sd_tp | transaction_price > mn_tp + 3*sd_tp |
+number_of_items < mn_ni - 3*sd_ni | number_of_items > mn_ni + 3*sd_ni)
+`", correct = TRUE),
+    answer("`df1 %>% group_by(month) %>% 
+summarise(mn_tp = mean(transaction_price), sd_tp = sd(transaction_price),
+ms_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
+filter(transaction_price < mn_tp - 3*sd_tp | transaction_price > mn_tp + 3*sd_tp |
+number_of_items < mn_ni - 3*sd_ni | number_of_items > mn_ni + 3*sd_ni)
+`"),
+    answer("`df1 %>% group_by(month) %>% 
+mutate(mn_tp = mean(transaction_price), sd_tp = sd(transaction_price),
+ms_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
+filter(transaction_price < mn_tp - 3*sd_tp , transaction_price > mn_tp + 3*sd_tp ,
+number_of_items < mn_ni - 3*sd_ni , number_of_items > mn_ni + 3*sd_ni)
+`"),
+    answer("`df1 %>% group_by(month) %>% 
+summarise(mn_tp = mean(transaction_price), sd_tp = sd(transaction_price),
+ms_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
+filter(transaction_price < mn_tp - 3*sd_tp , transaction_price > mn_tp + 3*sd_tp ,
+number_of_items < mn_ni - 3*sd_ni , number_of_items > mn_ni + 3*sd_ni)
+`")
   )
 )
 ```
