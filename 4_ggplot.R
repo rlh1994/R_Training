@@ -55,14 +55,11 @@ ggplot(data = diamonds, aes(y = price)) +
   geom_point(aes(x = x, col = 'xs')) + 
   geom_point(aes(x = z, col = 'zs')) +
   xlab("Dimension") + 
-  scale_color_manual(values = c('xs' = 'red', 'zs' = 'blue'), labels = c('X', 'Z'))
+  scale_color_manual(values = c('xs' = 'red', 'zs' = 'blue'), labels = c('X', 'Z'), name = "Custom legend\ntitle")
 
 # Manually specifying things in ggplot is possible, but usually a bit more complex than letting it do it for you
 # In particular, anything to do with legends tends to be really fiddely.
 
-#### Quiz 4 ####
-
-rmarkdown::run("Quiz4/Quiz4.Rmd")
 
 #### Exercises 1 ####
 
@@ -136,9 +133,6 @@ diamonds %>%
   ggtitle("Price of different cut and colour of diamond by weight") +
   theme_minimal()
 
-#### Quiz 5 ####
-
-rmarkdown::run("Quiz5/Quiz5.Rmd")
 
 #### Exercises 2 ####
 

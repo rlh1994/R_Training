@@ -22,44 +22,52 @@ a[4]`",
     answer("NA"),
     answer("5"),
     answer("60", correct = TRUE),
-    answer("1")
+    answer("1"),
+    random_answer_order = TRUE
   ),
   question("What does the `na.rm` parameter do in the `mean()` function?",
     answer("Removes any NAs from the calculation", correct = TRUE),
-    answer("Removes any NAs from the argument permenantly"),
-    answer("Returns nothing if the function would have returned NA")
+    answer("Removes any NAs from the argument permanently"),
+    answer("Returns nothing if the function would have returned NA"),
+    random_answer_order = TRUE
   ),
   question("How can I get help while using R? (Select all that apply)",
     answer("Press F1 when the cursor is within a function name", correct = TRUE),
     answer("Search in the help window", correct = TRUE),
     answer("Ask Ryan without having tried all correct options first"),
     answer("Type `?` followed by the function name", correct = TRUE),
-    answer("Google R followed by your function and what you are trying to do", correct = TRUE)
+    answer("Google R followed by your function and what you are trying to do", correct = TRUE),
+    random_answer_order = TRUE
   ),
   question("What type will the vector `c(TRUE, 8, 9.02431, FALSE, 001, NA)` be?",
     answer("Boolean"),
     answer("Character"),
     answer("A mix of types"),
-    answer("Numeric", correct = TRUE)
+    answer("Numeric", correct = TRUE),
+    random_answer_order = TRUE
   ),
 question("What is the final value of z in the following code?
-`y <- 7
+`
+y <- 7
 Y <- 9
 z <- y*10
-z <- z/5
+z <- z/5`
 ",
     answer("90"),
     answer("14", correct = TRUE),
     answer("18"),
-    answer("70")
+    answer("70"),
+    random_answer_order = TRUE
   ),
   question("If I asked you create a vector of numbers starting from 13, ending at 190, in steps of 17, what function would you use to do it?",
     answer("`length()`"),
     answer("`seq()`", correct = TRUE),
-    answer("`c()`")
+    answer("`c()`"),
+    random_answer_order = TRUE
   ),
   question("What is wrong with the following code?
-`cnt <- 1
+`
+cnt <- 1
 while (count != 10){
   print(paste('Count is now', cnt))
   cnt <- cnt + 2
@@ -67,7 +75,8 @@ while (count != 10){
     answer("Cnt is spelt wrong, it should be count"),
     answer("We should use for loop instead"),
     answer("The loop will never stop", correct = TRUE, message = "Why is this the case?"),
-    answer("Count is capitalised in the sentance but cnt isn't")
+    answer("Count is capitalised in the sentence but cnt isn't"),
+    random_answer_order = TRUE
   )
 )
 ```

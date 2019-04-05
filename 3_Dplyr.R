@@ -46,7 +46,7 @@ diamonds[diamonds$price > 5000, ] # Finally, we can filter our rows in the same 
 
 #### Piping ####
 # Before we get into the main functions of dplyr we should discuss one of the most useful tools in all of R, the pipe.
-# The pipe comes orginally from the magrittr package and implements a very simple idea.
+# The pipe comes originally from the magrittr package and implements a very simple idea.
 # What is on the left of the pipe, is passed as the first argument to the right of the pipe.
 
 # Consider the basic example
@@ -108,7 +108,7 @@ diamonds %>%
   )
 # Notice that as color:price contains table, it adds it back in on the end and returns all columns
 # It is generally a bad idea to use a range in a select unless you are certain the column order
-# will not change and you aren't using anthing else in the select.
+# will not change and you aren't using anything else in the select.
 
 # You can also use selecting columns as an opportunity to rename them
 diamonds %>%
@@ -137,7 +137,7 @@ diamonds %>%
   ) # Notice the double equals
 diamonds %>%
   filter(carat > 4,
-    color = "J"
+         color = "J"
   ) # You will get an error if you use a single equals
 
 # Filter on multiple conditions using an OR
@@ -175,7 +175,7 @@ rmarkdown::run("Quiz2/Quiz2.Rmd")
 
 #### Exercises 1 ####
 
-# The following exercises use the builtin mtcars dataset. First get familiar with it using the methods
+# The following exercises use the built-in mtcars dataset. First get familiar with it using the methods
 # described above. Notice that this dataset has rownames rather than just rownumbers.
 
 # 1) Print out the hp column using the select() function.
@@ -187,7 +187,7 @@ rmarkdown::run("Quiz2/Quiz2.Rmd")
 
 
 # 3) Print out the mpg, hp, vs, am, gear columns.
-# Consider using the colon : symbol to simplfy selection of consecutive columns.
+# Consider using the colon : symbol to simplify selection of consecutive columns.
 
 
 
@@ -247,7 +247,7 @@ diamonds %>%
   mutate(price_GBP = price / as.numeric(exch_rate$`GBPUSD=X.Close`))
 # The as.numeric as because the library pulls the data in a specific format.
 
-# Finally, we usualy want to keep the changed dataframe somewhere so we should assign it to a variable
+# Finally, we usually want to keep the changed dataframe somewhere so we should assign it to a variable
 diamonds2 <- diamonds %>%
   mutate(
     kg = carat / 5000,
@@ -266,7 +266,7 @@ diamonds2 <- diamonds %>%
 diamonds %>%
   group_by(cut)
 
-# Now it is grouped, we can use this to get aggreageted information in our mutate
+# Now it is grouped, we can use this to get aggregated information in our mutate
 diamonds %>%
   group_by(cut) %>%
   mutate(avg_price = mean(price))
@@ -307,7 +307,7 @@ diamonds_grouped <-
 
 is.grouped_df(diamonds_grouped)
 
-# Doesn't matter how many times you reasign the variable
+# Doesn't matter how many times you reassign the variable
 diamonds_grouped <-
   diamonds %>%
   group_by(cut, color, clarity)
@@ -338,7 +338,7 @@ write.csv(mtcars, "cars_data.csv", row.names = FALSE)
 
 # Next we want to import our data
 read.csv("cars_data.csv")
-# Remember that we need to assign it to a variale, and notice that the we lost the row names
+# Remember that we need to assign it to a variable, and notice that the we lost the row names
 cars_imported <- read.csv("cars_data.csv")
 
 # You may also want to look at the readxl package to go straight from excel instead of CSV.
@@ -348,7 +348,7 @@ cars_imported <- read.csv("cars_data.csv")
 
 # Let's really use the power of pipes to do many steps in one go
 # Let's go back to our density calculation:
-# We got a max volume and therefore a minimum desity. How good is this?
+# We got a max volume and therefore a minimum density. How good is this?
 # The density of diamonds is 3.51g/cm^3
 diamonds %>%
   mutate(
@@ -437,9 +437,9 @@ rmarkdown::run("Quiz3/Quiz3.Rmd")
 
 
 
-# Bonus) By brand of car (first word before the space in the row names) and cyclinder, what is the average and max mpg and hp?
+# Bonus) By brand of car (first word before the space in the row names) and cylinder, what is the average and max mpg and hp?
 # hint: you will need to google how to get the part of the string you want.
-# if you cannot find it, use this link (but ask, it's important to know how to google questions corretly!) https://stackoverflow.com/questions/15895050/
+# if you cannot find it, use this link (but ask, it's important to know how to google questions correctly!) https://stackoverflow.com/questions/15895050/
 
 
 

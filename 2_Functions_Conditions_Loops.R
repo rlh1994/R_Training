@@ -2,9 +2,9 @@
 #### Functions ####
 
 # A function can be defined by 3 things:
-  # Its arguments/Inputs
-  # What it does
-  # Its return value/Output
+# Its arguments/Inputs
+# What it does
+# Its return value/Output
 
 # Let's look at a basic function, the mean of a vector of values
 mean # pressing F1 with the cursor on the function (in this case "mean") will load the help
@@ -36,7 +36,7 @@ myfunc(5, 7)
 #### Conditionals ####
 
 # We will see some more useful conditionals later in the lesson, but you will sometimes want to do one thing
-# or another depending on certain conditons. Here's an example in case you ever need it
+# or another depending on certain conditions. Here's an example in case you ever need it
 if (length(x) > 20){
   print("That's a long vector!")
 } else if (length(x) > 10){
@@ -89,7 +89,7 @@ rmarkdown::run("Quiz1/Quiz1.Rmd")
 
 
 
-# Bonus: Use a while loop to generate the fibbonacci numbers less than 1000
-# Bonus: Create a function that takes a value, n, and returns that fibonacci number
+# Bonus: Use a while loop to generate the Fibonacci numbers less than 1000
+# Bonus: Create a function that takes a value, n, and returns that Fibonacci number
 
 

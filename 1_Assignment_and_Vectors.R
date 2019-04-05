@@ -1,4 +1,6 @@
 .rs.restartR()
+#install.packages(rmarkdown)
+#install.packages(learnr)
 #### RStudio ####
 
 # Anything that starts with a hash does not run (its a comment),
@@ -9,7 +11,7 @@
 # If the console shows a > on the bottom line it is ready to accept new commands,
 # If it shows a + it is expecting more input (usually you forgot to close a bracket)
 # If it shows nothing, R is running something and you should wait before giving it another command
-# To the upper right is the enviornment space where you can see all the stored data
+# To the upper right is the environment space where you can see all the stored data
 # Bottom right is files, plots, packages and help (help is very useful!)
 
 #### Assignment ####
@@ -19,19 +21,19 @@
 # To start off we will just assign a number to the variable x (store 10 in x)
 
 x <- 10 # Assigning the value 10 to the variable x
-x = 10 # You can use = rather than <- but it is not recomended as it will cause problems later
+x = 10 # You can use = rather than <- but it is not recommended as it will cause problems later
 
 # To see what x refers to we just run x and it will print out what it is. We can also look at it in the
 # environment window
 x
 
-# Note that R is case sensisitve  
+# Note that R is case sensitive  
 X <- 11
 
 # You can also assign a variable using a right assignment operator, although the need to do so is rare
 x -> 5
 
-# We can do basic arithmatic and either print of store the result
+# We can do basic arithmetic and either print of store the result
 x <- 10 * 3 # Notice this overwrites our previous x
 x / 10
 x**2 # Exponents
@@ -63,7 +65,7 @@ x[7] # if you ask for an element that doesn't exist, you get an NA
 # Just to really hit home that a single number is treated as a vector of length 1 in 1
 1[1]
 
-# A vector of characters wors in the same way
+# A vector of characters works in the same way
 y <- c("a", "b", "c", "r", "k")
 y
 y[1] # Again first element of vector
@@ -98,4 +100,4 @@ x[3] + x[4]
 
 
 # 5) Produce another vector of the numbers -1 to -10 and store it in neg_nums. Output the sum
-# between elemetns of the two vectors i.e. the first element of nums + the first element of neg_nums etc
+# between elements of the two vectors i.e. the first element of nums + the first element of neg_nums etc

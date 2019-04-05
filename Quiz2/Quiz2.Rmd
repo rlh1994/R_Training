@@ -20,33 +20,43 @@ quiz(
     answer("Sets the last argument of the left function to the first of the right"),
     answer("Let's you pass the left of the pipe as an argument to the right of it", correct = TRUE),
     answer("Passes the left output as the first right input only"),
-    answer("Makes you look cool and sophisticated")
+    answer("Makes you look cool and sophisticated"),
+    random_answer_order = TRUE
   ),
   question("Which function should you use to only have rows matching certain conditions?",
     answer("`conditional`"),
     answer("`select`"),
     answer("`filter`", correct = TRUE),
-    answer("`rows`")
+    answer("`rows`"),
+    random_answer_order = TRUE
   ),
   question("What function should you use to only have chosen columns?",
     answer("`select`", correct = TRUE),
     answer("`cols`"),
     answer("`filter`"),
-    answer("`choose`")
+    answer("`choose`"),
+    random_answer_order = TRUE
   ),
   question("Which of these produces a *different* output to the others?",
     answer("`diamonds[,2]`"),
     answer("`diamonds$cut`", correct = TRUE),
     answer("`diamonds[2]`"),
-    answer("`select(diamonds, cut)`")
+    answer("`select(diamonds, cut)`"),
+    random_answer_order = TRUE
   ),
   
   question("If I asked you to find me all the diamonds of clarity VVS1, with price less than $500, ordered by carat, giving me only the carat, cut, and depth (named deepness), which of the following codes would you use?",
-    answer("`diamonds %>% filter(clarity == 'VVS1', price < 500) %>% arrange(desc(carat)) %>% select(carat, cut, deepness = depth)`"),
-    answer("`diamonds %>% filter(clarity = 'VVS1', price < 500) %>% arrange(carat) %>% select(carat, cut, deepness = depth)`"),
-    answer("`diamonds %>% filter(clarity == 'VVS1' | price < 500) %>% arrange(carat) %>% select(carat, cut, deepness = depth)`"),
-    answer("`diamonds %>% filter(clarity == 'VVS1', price < 500) %>% arrange(carat) %>% select(carat, cut, deepness = depth)`", correct = TRUE),
-    answer("`diamonds %>% filter(clarity == 'VVS1', price < 500) %>% arrange(carat) %>% select(carat, cut, depth = deepness)`")
+    answer("`diamonds %>% filter(clarity == 'VVS1', price < 500) %>% 
+           arrange(desc(carat)) %>% select(carat, cut, deepness = depth)`"),
+    answer("`diamonds %>% filter(clarity = 'VVS1', price < 500) %>% 
+           arrange(carat) %>% select(carat, cut, deepness = depth)`"),
+    answer("`diamonds %>% filter(clarity == 'VVS1' | price < 500) %>% 
+           arrange(carat) %>% select(carat, cut, deepness = depth)`"),
+    answer("`diamonds %>% filter(clarity == 'VVS1', price < 500) %>% 
+           arrange(carat) %>% select(carat, cut, deepness = depth)`", correct = TRUE),
+    answer("`diamonds %>% filter(clarity == 'VVS1', price < 500) %>% 
+           arrange(carat) %>% select(carat, cut, depth = deepness)`"),
+    random_answer_order = TRUE
   )
 )
 ```
