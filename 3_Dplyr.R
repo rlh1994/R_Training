@@ -9,6 +9,7 @@ library("ggplot2")
 ?ggplot2
 
 #### Diamonds and data exploration ####
+
 # Diamonds is a built in dataset that comes with ggplot2. We can find out more about it in the usual way
 ?diamonds
 diamonds
@@ -137,7 +138,7 @@ diamonds %>%
   ) # Notice the double equals
 diamonds %>%
   filter(carat > 4,
-         color = "J"
+    color = "J"
   ) # You will get an error if you use a single equals
 
 # Filter on multiple conditions using an OR
@@ -173,13 +174,15 @@ diamonds %>%
 
 rmarkdown::run("Quiz2/Quiz2.Rmd")
 
+
 #### Exercises 1 ####
 
 # The following exercises use the built-in mtcars dataset. First get familiar with it using the methods
 # described above. Notice that this dataset has rownames rather than just rownumbers.
 
 # 1) Print out the hp column using the select() function.
-# Try using the pull() function instead of select to see what the difference is.
+# Try using the pull() function instead of select() to see what the difference is.
+
 
 
 # 2) Print out the all but hp column using the select() function.
@@ -197,7 +200,8 @@ rmarkdown::run("Quiz2/Quiz2.Rmd")
 
 
 # 5) To practise piping, create a dataftame that shows the mpg, wt and gear of all cars
-# with a qsec between the mean and the 3rd quartile of the data, putting the heaviest cars first
+# with a qsec between the mean and the 3rd quartile of the original mtcars data, putting the heaviest cars first
+
 
 
 
@@ -324,6 +328,7 @@ is.grouped_df(diamonds_grouped2)
 
 
 #### Exporting and Importing Data ####
+
 # You'll want to bring your own data into R to work with in the future.
 # There are ways to connect directly to databases, read from online sources, or connect APIs
 # But we'll just show you how to read and write CSVs here
@@ -398,49 +403,39 @@ rmarkdown::run("Quiz3/Quiz3.Rmd")
 
 #### Exercises 2 ####
 
-
-# 1) Create a new variable in the mycars data frame km_per_litre using the mutate() function. 
+# 1) Create a new variable in the mycars dataframe km_per_litre using the mutate() function.
 # Hint: 1 mpg is 0.425 km/l.
 
 
-# 2) Randomly select and print half the observations of mycars. 
+
+# 2) Randomly select and print half the observations of mycars.
 # Hint: consider using the sample_frac() function
 
 
 
-# 3) Create a mycars_s object, containing from 10th to 35th row of mycars. 
+# 3) Create a mycars_s object, containing from 10th to 35th row of mycars.
 # Hint: Consider using the slice() function.
 
 
 
-# 4) Print out the mycars_s object without any duplicates. 
-# Hint: Consider using the distinct() function.
+# 4) Print out from mycars_s object all the observations which have mpg>20 and hp>100.
 
 
 
-
-# 5) Print out from mycars_s object all the observations which have mpg>20 and hp>100.
-
+# 5) From mtcars, print out the row corresponding to the Lotus Europa car hint: use the row.names()
 
 
 
-# 6) Print out the row corresponding to the Lotus Europa car hint: use the row.names()
+# 6) From mtcars, create a table that gives the total number of cars and the average mpg by number of cylinders
 
 
 
-
-# 7) Create a table that gives the total number of cars and the average mpg by number of cylinders
-
-
-
-# 8) By number of gears, what is the max horsepower and average weight
+# 7) From mtcars, by number of gears, what is the max horsepower and average weight
 
 
 
-# Bonus) By brand of car (first word before the space in the row names) and cylinder, what is the average and max mpg and hp?
+# Bonus) From mtcars, by brand of car (first word before the space in the row names) and cylinder, what is the average and max mpg and hp?
 # hint: you will need to google how to get the part of the string you want.
 # if you cannot find it, use this link (but ask, it's important to know how to google questions correctly!) https://stackoverflow.com/questions/15895050/
-
-
 
 

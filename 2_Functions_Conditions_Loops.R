@@ -16,7 +16,7 @@ mean(x = c(1, 2, 3, 4, 5, 6, NA)) # We can't take the average with a missing val
 mean(x = c(1, 2, 3, 4, 5, 6, NA), na.rm = TRUE) # This option removes the NAs during calculation
 mean(x = c(1, 2, 3, 4, 5, 6, NA), trim = 0.1, na.rm = TRUE) # This removes 20% of the values (10% each end)
 
-# Some more functions 
+# Some more functions
 str <- "this is a test string"
 substr(str, 15, 20) # the usual functions you want exist (but note the different variables compared to sql, start and stop not start and length)
 length(x) # length of a vector (number of elements)
@@ -26,24 +26,26 @@ seq(from = 1, to = 100, by = 10) # produces a generic sequence
 
 # Finally, not covered in detail is how to create your own functions. This can sometimes come in handy but
 # is not more for reference at this point so don't worry too much about it.
-myfunc <- function(x, y){
-  z <- 2*x + y
+myfunc <- function(x, y) {
+  z <- 2 * x + y
   return(z)
 }
 
 myfunc(5, 7)
 
+
 #### Conditionals ####
 
 # We will see some more useful conditionals later in the lesson, but you will sometimes want to do one thing
 # or another depending on certain conditions. Here's an example in case you ever need it
-if (length(x) > 20){
+if (length(x) > 20) {
   print("That's a long vector!")
-} else if (length(x) > 10){
+} else if (length(x) > 10) {
   print("That's a decent sized vector.")
 } else {
   print("Did you even try...")
 }
+
 
 #### Loops ####
 
@@ -58,13 +60,14 @@ for (n in x) {
 
 # A while loop keeps going until it's condition is false (it finishes it's current loop)
 # Make sure your loop will reach that false condition or it will run forever!
-y <- 0 
-while (y < 7){
-  print(paste('The current value of y is', y))
+y <- 0
+while (y < 7) {
+  print(paste("The current value of y is", y))
   y <- y + 1
 }
 
-#### Quiz #### 
+
+#### Quiz ####
 
 rmarkdown::run("Quiz1/Quiz1.Rmd")
 
@@ -79,17 +82,18 @@ rmarkdown::run("Quiz1/Quiz1.Rmd")
 
 
 
-# 3) Use a while loop to print out the print out all the square numbers less than 1061000
+# 3) Use a while loop to print out all the square numbers less than 1061000
 # Bonus to tell me what number squared is the closest but still beneath it
 
 
 
-# 4) R has a mean and a median function, create/find one using google but make sure to try and
+# 4) R has a mean and a median function but no mode function, create/find one using google but make sure to try and
 # understand how it works!
 
 
 
 # Bonus: Use a while loop to generate the Fibonacci numbers less than 1000
+
+
+
 # Bonus: Create a function that takes a value, n, and returns that Fibonacci number
-
-

@@ -1,0 +1,432 @@
+---
+title: "Solutions to exercises"
+author: "Ryan Hill"
+date: "6 April 2019"
+output: 
+  format: html_document
+  toc: float
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+#library(kabble)
+```
+
+## Intro
+The following are suggested solutions to the exercises given in the training resources. They are not intended to be the *best* way to do things, by speed or efficiency or even niceness of code, but simple a way to get the answer. If you find other ways that get the same answer then that's great. The questions are designed to get you used to certain concepts so please make sure you have attempted the exercise before looking at the answer, and try tweaking any answers to see how you might answer a similar but different question.
+
+## Assignment and Vectors Exercises
+
+1) Assign the name of the person to your left to a variable called `left`, and the same for `right`.
+```{r}
+left <- 'Rachel'
+right <- 'Ross'
+```
+
+We do this using the `<-` assignment operator.
+
+2) Create a vector of the numbers 1 to 10 and store it in a variable called `nums`
+```{r}
+nums <- 1:10
+nums
+```
+
+We do this using `:` to produce a sequenced vector from 1 to 10
+
+3) Take that vector and output the square of each number
+```{r}
+nums**2
+```
+
+We do this using the `**` operator which is the exponent operator. As R is vectorised this acts on all elements of nums. 
+
+4) Output just those elements of the vector that are less than or equal to 4
+```{r}
+nums[nums <= 4]
+```
+
+We are selecting the elements of nums by first generating a logical vector using the `nums <= 4` statement.
+
+5) Produce another vector of the numbers -1 to -10 and store it in `neg_nums`. Output the sum between elements of the two vectors i.e. the first element of `nums` + the first element of `neg_nums` etc
+```{r}
+neg_nums = -1:-10
+nums + neg_nums
+```
+
+We do this by using the same `:` as before but with negative numbers. We then add the vectors element-wise by just using the `+` operator.
+
+## Function, Conditions, and Loops Exercises
+
+1) Generate a vector of numbers, starting at 13, ending at 190, in steps of 17.
+```{r}
+seq(13, 190, 17)
+```
+
+The `seq` function is the solution to this question.
+
+2) Combine a loop and a conditional statement to cycle through all elements in the vector you just created and print out each value with whether it is even or odd (you may need to google how to find that)
+```{r}
+for (i in seq(13, 190, 17)){
+  if (i %% 2 == 0) print('Even')
+  else  print('Odd')
+}
+```
+
+The `for` loop executes its code for every element in our sequence which gets assigned to `i` one at a time. Each time round we check if `i` divided by 2 has a remainder (`%%`) of 0, if it does then we return Even, otherwise we return Odd.
+
+3) Use a `while` loop to print out all the square numbers less than 1061000  
+Bonus to tell me what number squared is the closest but still beneath it
+```{r}
+x <- 1
+while (x**2 < 1061000){
+  print(x**2)
+  x <- x + 1
+}
+x - 1
+```
+
+We use a `while` loop until the value of `x` squared is greater than 1061000. At this point `x` has been increased by 1 too many so we print 1 less than `x`.
+
+4) R has a `mean` and a `median` function but no `mode` function, create/find one using google but make sure to try and understand how it works!
+```{r}
+Mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+```
+
+This one is a bit more complex. Let's examine each step individually
+```{r}
+x <- c(5, 4, 5, 4, 9, 0, 0, 8, 1)
+ux <- unique(x)
+ux
+match(x, ux)
+tabulate(match(x, ux))
+which.max(tabulate(match(x, ux)))
+ux[which.max(tabulate(match(x, ux)))]
+
+```
+
+So `ux` is just a unique list of our elements in `x`.  
+`match(x, ux)` gives us a vector that for each element in `x` the position in `ux`.  
+`tabulate(match(x, ux))` gives us a vector of the count of each number in the previous result, so there are 2 1s, 2 2s, 1 3 etc.  
+`which.max(tabulate(match(x, ux)))` returns the position of the *first* maximum value in its argument. In this case position 1.  
+`ux[which.max(tabulate(match(x, ux)))]` then gives us that element of `ux` which is our mode!  
+
+Bonus: Use a while loop to generate the Fibonacci numbers less than 1000
+```{r}
+x <- 1
+y <- 1
+n <- 2
+while (x < 1000){
+  print(paste("The", n,"th Fibonacci number is", x))
+  z <- x
+  x <- x + y
+  y <- z
+  n <- n + 1
+}
+```
+
+The Fibonacci sequence is defined as F(1) = F(2) = 1 and F(n) = F(n-1) + F(n-2). So we initialise `x` and `y` as F(1) and F(2), and n = 2. So, to calculate F(3) we need to add F(2) and F(1). We store F(2) in `z` temporarily, store F(3) in `x` and then store F(2) in `y`, and finally increment `n`. We can then keep doing this until `x` which is F(n) is greater than 1000.
+
+Bonus: Create a `function` that takes a value, `n`, and returns that Fibonacci number
+```{r}
+# Recursive method
+fibo_rec <- function(n) {
+  if (n == 2 | n == 1) return(1)
+  else return(fibo_rec(n-1) + fibo_rec(n-2))
+}
+
+# Iterative method
+fibo_iter <- function(n) {
+  if (n == 2 | n == 1) return(1)
+  else{
+    x <- 1
+    y <- 1
+    i <- 2
+    while (i < n){
+      z <- x
+      x <- x + y
+      y <- z
+      i <- i + 1
+    }
+  return(x)
+  }
+}
+
+
+# Check they work
+for(i in 1:20){
+  print(paste(fibo_rec(i), fibo_iter(i)))
+}
+```
+
+There's 2 basic ways to calculate the nth Fibonacci number (without doing dynamic programming) that is pretty much either work up or work down. The first method works down, starting with the definition of F(n) = F(n-1) + F(n-2) until it hits one of the base cases, calling itself until it gets to a base case. This is known as recursion and will not be covered here but many resources are available on the topic.
+
+The second method works up, using the same approach as above but with a check on the counter rather than the result this time.
+
+
+## `Dplyr` Exercises 1 ##
+
+The following exercises use the built-in `mtcars` dataset. First get familiar with it using the methods described above. Notice that this dataset has rownames rather than just rownumbers.
+```{r}
+mtcars
+#?mtcars
+summary(mtcars)
+str(mtcars)
+```
+
+1) Print out the hp column using the `select()` function.  
+Try using the `pull()` function instead of `select()` to see what the difference is.
+```{r}
+mtcars %>% select(hp)
+mtcars %>% pull(hp)
+```
+
+Select returns a dataframe, as where pull returns a vector.
+
+2) Print out the all but hp column using the `select()` function.
+```{r}
+mtcars %>% select (-hp)
+```
+
+We can use the `-` before a column name in `select` to remove that column.
+
+3) Print out the mpg, hp, vs, am, gear columns.  
+Consider using the colon `:` symbol to simplify selection of consecutive columns.
+```{r}
+mtcars %>% select(mpg, vs:gear)
+```
+
+Using the `:` we can list sequential columns without having to type them all out.
+
+4) Create the object `mycars` containing the columns mpg, hp columns but let the column names be miles_per_gallon, and horse_power respectively.
+```{r}
+mycars <- mtcars %>% select(miles_per_gallon = mpg, horse_power = hp)
+mycars
+```
+
+Remembering we can rename columns in a `select` makes this easy!
+
+5) To practice piping, create a dataftame that shows the mpg, wt and gear of all cars with a qsec between the mean and the 3rd quartile of the original `mtcars` data, putting the heaviest cars first
+```{r}
+# We can do it using the specific values given to us in the summary output above
+mtcars %>% 
+  filter(qsec > 17.85, qsec < 18.90) %>%
+  select(mpg, wt, gear) %>% 
+  arrange(wt %>% desc())
+
+# But this might not be fully accurate and isn't adaptable. Instead we could add in the mean and quantiles as columns.
+mtcars %>% 
+  mutate(mn = mean(qsec), q3 = quantile(qsec)[4]) %>%
+  filter(qsec > mn, qsec < q3) %>%
+  select(mpg, wt, gear) %>% 
+  arrange(wt %>% desc())
+```
+
+This question relies mostly on the ability to pipe one step into another, and break the work down into each step. First we do the filtering, then we select the columns, and finally we arrange out data in descending order by weight. 
+
+The second option first adds two columns, the mean of qsec and the third quartile (the first element of `quantile(qsec)` is the 0th quartile). This means we could apply it to different data and it still be correct. We will see `mutate` and aggregations next!
+
+## `Dplyr` Exercises 2
+
+1) Create a new variable in the `mycars` dataframe km_per_litre using the `mutate()` function.  
+Hint: 1 mpg is 0.425 km/l.
+```{r}
+mycars <- mycars %>% mutate(km_per_litre = miles_per_gallon*0.425)
+mycars
+```
+
+`mutate` is used to create a new column.
+
+2) Randomly select and print half the observations of mycars.  
+Hint: consider using the `sample_frac()` function
+```{r}
+#?sample_frac
+mycars %>% sample_frac(size = 0.5)
+```
+
+`sample_frac` is very useful when you want a random sample of your data.
+
+3) Create a `mycars_s` object, containing from 10th to 35th row of `mycars`.   
+Hint: Consider using the `slice()` function.
+```{r}
+#?slice
+mycars_s <- mycars %>% slice(10:35)
+mycars_s
+```
+
+Notice that `mycars_s` only has 23 rows, despite you specifying a `slice` of 25. This is because `mycars` (and `mycars`) only has 32 observations total.
+
+4) Print out from `mycars_s` object all the observations which have mpg>20 and hp>100.
+```{r}
+mycars_s %>% filter(miles_per_gallon > 20, horse_power > 100)
+```
+
+We combine multiple `filter` requirements using a comma.
+
+5) From `mtcars`, print out the row corresponding to the `Lotus Europa` car  
+Hint: use the row.names()
+```{r}
+mtcars %>% filter(row.names(.) == 'Lotus Europa')
+```
+
+The `row.names()` function will return the rownames in our data. We pass the left side of the pipe into it using the `.` to specify we want to use that.
+
+6) From `mtcars`, create a table that gives the total number of cars and the average mpg by number of cylinders
+```{r}
+mtcars %>% 
+  group_by(cyl) %>%
+  summarise(no_cars = n(),
+            avg_mpg = mean(mpg))
+```
+
+A simple group by and summarise is used to create the aggregated information.
+
+7) From `mtcars`, by number of gears, what is the max horsepower and average weight
+```{r}
+mtcars %>% 
+  group_by(gear) %>%
+  summarise(max_hp = max(hp),
+            avg_wt = mean(wt))
+```
+
+Similar to the last question.
+
+Bonus: From `mtcars`, by brand of car (first word before the space in the row names) and cylinder, what is the average and max mpg and hp?  
+hint: you will need to google how to get the part of the string you want. If you cannot find it, use this link (but ask, it's important to know how to google questions correctly!) https://stackoverflow.com/questions/15895050/
+```{r}
+# Many ways to do this, here is one option that I like
+mtcars %>%
+  group_by(brand = row.names(.) %>% stringr::word(1), cyl) %>%
+  summarise(avg_mpg = mean(mpg),
+            max_mpg = max(mpg),
+            avg_hp = mean(hp),
+            max_hp = max(hp))
+```
+
+Here we get a bit fancy. We are grouping by a column that doesn't technically exist, but that's fine, as it creates it for us (and we name it brand), and also grouping by cyl at the same time. This column is made using `row.names` as before, but also a function from the `stringr` package called `word` which takes a string as an argument and returns the nth word, in this case the first, in that string. There are a few other ways to do this, including regular expressions using gsub, but for simple needs `stringr` can usually do what you want, and is easier to understand. After this we just summarise as usual.
+
+## `GGplot` Exercises 1
+
+1) Create a scatter plot that visualises how the width (`x`) and depth (`z`) of diamond varies
+```{r}
+diamonds %>% 
+  ggplot(aes(x = x, y = z)) + 
+  geom_point()
+```
+
+Passing the `diamonds` data to ggplot, we then just have to set the `x` and `y` values for the plot, in this case the width (`x`) and depth (`z`) columns of our data. Note that the left `x` is the argument of `aes` for what value is that axis for that data point, and the right `x` is the column name in the data.
+
+2) Are there any outlier values? Remove these from the data then re-plot
+```{r}
+diamonds %>% 
+  filter(x > 0, z > 0, z < 10) %>%
+  ggplot(aes(x = x, y = z)) + 
+  geom_point()
+```
+
+It is quite clear to see there are some diamonds with a 0 measurement in one dimension, and as we aren't dealing with graphene this isn't possible. There is also one diamond with a `z` of over 30, which seems wrong. Using pipes we can easily insert a filter into the code and keep the rest the same.
+
+3) Now have the colour of the points vary by clarity
+```{r}
+diamonds %>% 
+  filter(x > 0, z > 0, z < 10) %>%
+  ggplot(aes(x = x, y = z, col = clarity)) + 
+  geom_point()
+```
+
+Simply adding `col = clarity` into our aesthetic (not outside of it) sets the colour per point for us.
+
+4) Now have the size of the points vary by carat
+```{r}
+diamonds %>% 
+  filter(x > 0, z > 0, z < 10) %>%
+  ggplot(aes(x = x, y = z, col = clarity, size = carat)) + 
+  geom_point()
+```
+
+Another simple addition to our aesthetic changes the size of the points by carat for us.
+
+5) Label your axis using `xlab()` and `ylab()`, and add a title using `ggtitle()`
+```{r}
+diamonds %>% 
+  filter(x > 0, z > 0, z < 10) %>%
+  ggplot(aes(x = x, y = z, col = clarity, size = carat)) + 
+  geom_point() +
+  xlab('Width') +
+  ylab('Depth') +
+  ggtitle('Width and Depth of diamonds')
+```
+
+Labels are *always* important, otherwise your data means nothing.
+
+## GGplot Exercises 2
+
+1) Make a plot using mtcars of hp vs mpg, colour it by cylinder.  
+Can you make the cyl discrete? try `as.character()`
+```{r}
+mtcars %>% 
+  ggplot(aes(x = hp, y = mpg, col = as.character(cyl))) +
+  geom_point()
+```
+
+The `as.character()` is important as it forces our `cyl` values to be treated as text rather than numbers, meaning they get distinct colours not a range. You could also use `as.factor()` as we will see later.
+
+2) Now split it out into facets by cylinder instead
+```{r}
+mtcars %>% 
+  ggplot(aes(x = hp, y = mpg)) +
+  geom_point() +
+  facet_wrap(~cyl)
+```
+
+By adding `facet_wrap` we get 3 different plots now and can examine them separately.
+
+3) Load the `iris` datasdet and examine it. Plot Sepal length vs petal length
+```{r}
+#?iris
+str(iris)
+head(iris)
+summary(iris)
+
+iris %>% 
+  ggplot(aes(x = Sepal.Length, y = Petal.Length)) +
+  geom_point()
+```
+
+Our usual basic plot.
+
+4) Now colour it by the species
+```{r}
+iris %>% 
+  ggplot(aes(x = Sepal.Length, y = Petal.Length, col = Species)) +
+  geom_point() 
+```
+
+Same as before.
+
+5) Now split them out using facets and create a line of best fit for each (think about your scales)  
+Which species seem to follow a linear trend?
+```{r}
+iris %>% 
+  ggplot(aes(x = Sepal.Length, y = Petal.Length)) +
+  geom_point() +
+  facet_wrap(~Species, scales = 'free') +
+  geom_smooth(method = 'lm')
+```
+
+Adding `scales = 'free'` is important as the different species have quite different data ranges and this makes it easier for us to view them. We easily added a linear model per species in one line. Both versicolor and virginica seemt to follow a linear trend, with the latter following it more closely.
+
+6) Use the `nycflights13::flights` dataset and see if you can work out how to create a boxplot of arrival delay, by month, setting the y axis limits to between -20 and 20  
+Hint: boxplot only NEEDS a y value
+```{r}
+nycflights13::flights %>%
+  ggplot(aes(x = as.factor(month), y = arr_delay, group = month, fill = as.factor(month))) +
+  geom_boxplot() +
+  ylim(c(-20, 20))
+```
+
+There's a lot of new stuff here. we use `as.factor()` to convert out month column to a factor rather than a number so that the colours and distinct, and also so the axis displays all values rather than in-between values. We use `fill` rather than `col` as we want to, unsurprisingly, fill the box not colour it. Then we use `geom_boxplot` to make a boxplot, the same way we did a scatter plot.

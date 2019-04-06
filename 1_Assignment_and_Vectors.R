@@ -1,6 +1,8 @@
 .rs.restartR()
-#install.packages(rmarkdown)
-#install.packages(learnr)
+# install.packages(rmarkdown)
+# install.packages(learnr)
+
+
 #### RStudio ####
 
 # Anything that starts with a hash does not run (its a comment),
@@ -14,6 +16,7 @@
 # To the upper right is the environment space where you can see all the stored data
 # Bottom right is files, plots, packages and help (help is very useful!)
 
+
 #### Assignment ####
 
 # A variable is an object that we care store something in and refer to later.
@@ -21,13 +24,13 @@
 # To start off we will just assign a number to the variable x (store 10 in x)
 
 x <- 10 # Assigning the value 10 to the variable x
-x = 10 # You can use = rather than <- but it is not recommended as it will cause problems later
+x <- 10 # You can use = rather than <- but it is not recommended as it will cause problems later
 
 # To see what x refers to we just run x and it will print out what it is. We can also look at it in the
 # environment window
 x
 
-# Note that R is case sensitive  
+# Note that R is case sensitive
 X <- 11
 
 # You can also assign a variable using a right assignment operator, although the need to do so is rare
@@ -37,6 +40,7 @@ x -> 5
 x <- 10 * 3 # Notice this overwrites our previous x
 x / 10
 x**2 # Exponents
+
 
 #### Vectors ####
 
@@ -75,11 +79,12 @@ y[y == "c"]
 
 # If we try to combine types, we'll see that R automatically converts them to the type that it can store
 # them all as. It goes boolean -> number -> string
-z <- c("a", "b", 1, 3, pi, "character string", "123") 
+z <- c("a", "b", 1, 3, pi, "character string", "123")
 
 # all elements have been COERCED to the most flexible type, in this case characters
 z[3] + z[4] # this will not run because they are a non numeric argument to a binary operator (using a non numerical character to answer a numerical question)
 x[3] + x[4]
+
 
 #### Exercises ####
 
@@ -101,3 +106,5 @@ x[3] + x[4]
 
 # 5) Produce another vector of the numbers -1 to -10 and store it in neg_nums. Output the sum
 # between elements of the two vectors i.e. the first element of nums + the first element of neg_nums etc
+
+
