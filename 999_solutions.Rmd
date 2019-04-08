@@ -11,11 +11,20 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
 library(ggplot2)
-#library(kabble)
+library(kableExtra)
+
+nice_format <- function(df) {
+  df %>% kable() %>%
+kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"), font_size = 12)%>%
+scroll_box(width = "100%", height = "400px")
+}
 ```
 
 ## Intro
-The following are suggested solutions to the exercises given in the training resources. They are not intended to be the *best* way to do things, by speed or efficiency or even niceness of code, but simple a way to get the answer. If you find other ways that get the same answer then that's great. The questions are designed to get you used to certain concepts so please make sure you have attempted the exercise before looking at the answer, and try tweaking any answers to see how you might answer a similar but different question.
+The following are suggested solutions to the exercises given in the training resources. They are not intended to be the *best* way to do things, by speed or efficiency or even niceness of code, but simple a way to get the answer. If you find other ways that get the same answer then that's great. The questions are designed to get you used to certain concepts so please make sure you have attempted the exercise before looking at the answer, and try tweaking any answers to see how you might answer a similar but different question.  
+
+As a final note, for formatting purposes most dataframe outputs have the following code after it `%>% nice_format()` to make the output nicer in the html file, you can ignore this, it is just for the purpose of the output document.
+
 
 ## Assignment and Vectors Exercises
 
@@ -78,12 +87,22 @@ The `for` loop executes its code for every element in our sequence which gets as
 
 3) Use a `while` loop to print out all the square numbers less than 1061000  
 Bonus to tell me what number squared is the closest but still beneath it
-```{r}
+```{r, eval = FALSE}
 x <- 1
 while (x**2 < 1061000){
   print(x**2)
   x <- x + 1
 }
+x - 1
+```
+```{r echo=FALSE}
+x <- 1
+sqrs <- c()
+while (x**2 < 1061000){
+  sqrs <- c(sqrs, x**2)
+  x <- x + 1
+}
+sqrs %>% nice_format()
 x - 1
 ```
 
@@ -172,24 +191,25 @@ The second method works up, using the same approach as above but with a check on
 
 The following exercises use the built-in `mtcars` dataset. First get familiar with it using the methods described above. Notice that this dataset has rownames rather than just rownumbers.
 ```{r}
-mtcars
+mtcars %>% nice_format()
 #?mtcars
-summary(mtcars)
+summary(mtcars) 
 str(mtcars)
 ```
+
 
 1) Print out the hp column using the `select()` function.  
 Try using the `pull()` function instead of `select()` to see what the difference is.
 ```{r}
-mtcars %>% select(hp)
-mtcars %>% pull(hp)
+mtcars %>% select(hp) %>% nice_format()
+mtcars %>% pull(hp) 
 ```
 
 Select returns a dataframe, as where pull returns a vector.
 
 2) Print out the all but hp column using the `select()` function.
 ```{r}
-mtcars %>% select (-hp)
+mtcars %>% select (-hp) %>% nice_format()
 ```
 
 We can use the `-` before a column name in `select` to remove that column.
@@ -197,7 +217,7 @@ We can use the `-` before a column name in `select` to remove that column.
 3) Print out the mpg, hp, vs, am, gear columns.  
 Consider using the colon `:` symbol to simplify selection of consecutive columns.
 ```{r}
-mtcars %>% select(mpg, vs:gear)
+mtcars %>% select(mpg, vs:gear) %>% nice_format()
 ```
 
 Using the `:` we can list sequential columns without having to type them all out.
@@ -205,7 +225,7 @@ Using the `:` we can list sequential columns without having to type them all out
 4) Create the object `mycars` containing the columns mpg, hp columns but let the column names be miles_per_gallon, and horse_power respectively.
 ```{r}
 mycars <- mtcars %>% select(miles_per_gallon = mpg, horse_power = hp)
-mycars
+mycars %>% nice_format()
 ```
 
 Remembering we can rename columns in a `select` makes this easy!
@@ -216,14 +236,14 @@ Remembering we can rename columns in a `select` makes this easy!
 mtcars %>% 
   filter(qsec > 17.85, qsec < 18.90) %>%
   select(mpg, wt, gear) %>% 
-  arrange(wt %>% desc())
+  arrange(wt %>% desc()) %>% nice_format()
 
 # But this might not be fully accurate and isn't adaptable. Instead we could add in the mean and quantiles as columns.
 mtcars %>% 
   mutate(mn = mean(qsec), q3 = quantile(qsec)[4]) %>%
   filter(qsec > mn, qsec < q3) %>%
   select(mpg, wt, gear) %>% 
-  arrange(wt %>% desc())
+  arrange(wt %>% desc()) %>% nice_format()
 ```
 
 This question relies mostly on the ability to pipe one step into another, and break the work down into each step. First we do the filtering, then we select the columns, and finally we arrange out data in descending order by weight. 
@@ -236,7 +256,7 @@ The second option first adds two columns, the mean of qsec and the third quartil
 Hint: 1 mpg is 0.425 km/l.
 ```{r}
 mycars <- mycars %>% mutate(km_per_litre = miles_per_gallon*0.425)
-mycars
+mycars %>% nice_format()
 ```
 
 `mutate` is used to create a new column.
@@ -245,7 +265,7 @@ mycars
 Hint: consider using the `sample_frac()` function
 ```{r}
 #?sample_frac
-mycars %>% sample_frac(size = 0.5)
+mycars %>% sample_frac(size = 0.5) %>% nice_format()
 ```
 
 `sample_frac` is very useful when you want a random sample of your data.
@@ -255,14 +275,14 @@ Hint: Consider using the `slice()` function.
 ```{r}
 #?slice
 mycars_s <- mycars %>% slice(10:35)
-mycars_s
+mycars_s %>% nice_format()
 ```
 
 Notice that `mycars_s` only has 23 rows, despite you specifying a `slice` of 25. This is because `mycars` (and `mycars`) only has 32 observations total.
 
 4) Print out from `mycars_s` object all the observations which have mpg>20 and hp>100.
 ```{r}
-mycars_s %>% filter(miles_per_gallon > 20, horse_power > 100)
+mycars_s %>% filter(miles_per_gallon > 20, horse_power > 100) %>% nice_format()
 ```
 
 We combine multiple `filter` requirements using a comma.
@@ -270,7 +290,7 @@ We combine multiple `filter` requirements using a comma.
 5) From `mtcars`, print out the row corresponding to the `Lotus Europa` car  
 Hint: use the row.names()
 ```{r}
-mtcars %>% filter(row.names(.) == 'Lotus Europa')
+mtcars %>% filter(row.names(.) == 'Lotus Europa') %>% nice_format()
 ```
 
 The `row.names()` function will return the rownames in our data. We pass the left side of the pipe into it using the `.` to specify we want to use that.
@@ -280,7 +300,7 @@ The `row.names()` function will return the rownames in our data. We pass the lef
 mtcars %>% 
   group_by(cyl) %>%
   summarise(no_cars = n(),
-            avg_mpg = mean(mpg))
+            avg_mpg = mean(mpg)) %>% nice_format()
 ```
 
 A simple group by and summarise is used to create the aggregated information.
@@ -290,7 +310,7 @@ A simple group by and summarise is used to create the aggregated information.
 mtcars %>% 
   group_by(gear) %>%
   summarise(max_hp = max(hp),
-            avg_wt = mean(wt))
+            avg_wt = mean(wt)) %>% nice_format()
 ```
 
 Similar to the last question.
@@ -304,7 +324,7 @@ mtcars %>%
   summarise(avg_mpg = mean(mpg),
             max_mpg = max(mpg),
             avg_hp = mean(hp),
-            max_hp = max(hp))
+            max_hp = max(hp)) %>% nice_format()
 ```
 
 Here we get a bit fancy. We are grouping by a column that doesn't technically exist, but that's fine, as it creates it for us (and we name it brand), and also grouping by cyl at the same time. This column is made using `row.names` as before, but also a function from the `stringr` package called `word` which takes a string as an argument and returns the nth word, in this case the first, in that string. There are a few other ways to do this, including regular expressions using gsub, but for simple needs `stringr` can usually do what you want, and is easier to understand. After this we just summarise as usual.
@@ -389,7 +409,7 @@ By adding `facet_wrap` we get 3 different plots now and can examine them separat
 ```{r}
 #?iris
 str(iris)
-head(iris)
+head(iris) %>% nice_format()
 summary(iris)
 
 iris %>% 
