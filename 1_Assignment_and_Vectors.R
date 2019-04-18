@@ -1,6 +1,7 @@
 .rs.restartR()
-# install.packages(rmarkdown)
-# install.packages(learnr)
+# install.packages("rmarkdown")
+# install.packages("learnr")
+# install.packages("shiny")
 
 
 #### RStudio ####
