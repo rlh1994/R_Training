@@ -21,7 +21,7 @@ scroll_box(width = "100%", height = "400px")
 ```
 
 ## Intro
-The following are suggested solutions to the exercises given in the training resources. They are not intended to be the *best* way to do things, by speed or efficiency or even niceness of code, but simpley *a* way to get the answer. If you find other ways that get the same answer then that's great. The questions are designed to get you used to certain concepts so please make sure you have attempted the exercise before looking at the answer, and try tweaking any answers to see how you might answer a similar but different question.  
+The following are suggested solutions to the exercises given in the training resources. They are not intended to be the *best* way to do things, by speed or efficiency or even niceness of code, but simply *a* way to get the answer. If you find other ways that get the same answer then that's great. The questions are designed to get you used to certain concepts so please make sure you have attempted the exercise before looking at the answer, and try tweaking any answers to see how you might answer a similar but different question.  
 
 As a final note, for formatting purposes most dataframe outputs have the following custom code after it `%>% nice_format()` to make the output nicer in the html file, you can ignore this, it is just for the purpose of the output document.
 
@@ -439,7 +439,7 @@ iris %>%
   geom_smooth(method = 'lm')
 ```
 
-Adding `scales = 'free'` is important as the different species have quite different data ranges and this makes it easier for us to view them. We easily added a linear model per species in one line. Both versicolor and virginica seemt to follow a linear trend, with the latter following it more closely.
+Adding `scales = 'free'` is important as the different species have quite different data ranges and this makes it easier for us to view them. We easily added a linear model per species in one line. Both versicolor and virginica seems to follow a linear trend, with the latter following it more closely.
 
 6) Use the `nycflights13::flights` dataset and see if you can work out how to create a boxplot of arrival delay, by month, setting the y axis limits to between -20 and 20  
 Hint: boxplot only NEEDS a y value
