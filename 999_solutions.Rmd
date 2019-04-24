@@ -21,9 +21,9 @@ scroll_box(width = "100%", height = "400px")
 ```
 
 ## Intro
-The following are suggested solutions to the exercises given in the training resources. They are not intended to be the *best* way to do things, by speed or efficiency or even niceness of code, but simple a way to get the answer. If you find other ways that get the same answer then that's great. The questions are designed to get you used to certain concepts so please make sure you have attempted the exercise before looking at the answer, and try tweaking any answers to see how you might answer a similar but different question.  
+The following are suggested solutions to the exercises given in the training resources. They are not intended to be the *best* way to do things, by speed or efficiency or even niceness of code, but simpley *a* way to get the answer. If you find other ways that get the same answer then that's great. The questions are designed to get you used to certain concepts so please make sure you have attempted the exercise before looking at the answer, and try tweaking any answers to see how you might answer a similar but different question.  
 
-As a final note, for formatting purposes most dataframe outputs have the following code after it `%>% nice_format()` to make the output nicer in the html file, you can ignore this, it is just for the purpose of the output document.
+As a final note, for formatting purposes most dataframe outputs have the following custom code after it `%>% nice_format()` to make the output nicer in the html file, you can ignore this, it is just for the purpose of the output document.
 
 
 ## Assignment and Vectors Exercises
@@ -49,18 +49,19 @@ We do this using `:` to produce a sequenced vector from 1 to 10
 nums**2
 ```
 
-We do this using the `**` operator which is the exponent operator. As R is vectorised this acts on all elements of nums. 
+We do this using the `**` operator which is the exponent operator. As R is vectorised this acts on all elements of `nums`. 
 
 4) Output just those elements of the vector that are less than or equal to 4
 ```{r}
 nums[nums <= 4]
 ```
 
-We are selecting the elements of nums by first generating a logical vector using the `nums <= 4` statement.
+We are selecting the elements of `nums` by first generating a logical vector using the `nums <= 4` statement.
 
 5) Produce another vector of the numbers -1 to -10 and store it in `neg_nums`. Output the sum between elements of the two vectors i.e. the first element of `nums` + the first element of `neg_nums` etc
 ```{r}
 neg_nums = -1:-10
+neg_nums
 nums + neg_nums
 ```
 
@@ -73,7 +74,7 @@ We do this by using the same `:` as before but with negative numbers. We then ad
 seq(13, 190, 17)
 ```
 
-The `seq` function is the solution to this question.
+The `seq` function is the solution to this question as it takes a start, an end, and a step argument.
 
 2) Combine a loop and a conditional statement to cycle through all elements in the vector you just created and print out each value with whether it is even or odd (you may need to google how to find that)
 ```{r}
