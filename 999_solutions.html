@@ -199,8 +199,8 @@ $(document).ready(function () {
 
 <div id="intro" class="section level2">
 <h2>Intro</h2>
-<p>The following are suggested solutions to the exercises given in the training resources. They are not intended to be the <em>best</em> way to do things, by speed or efficiency or even niceness of code, but simple a way to get the answer. If you find other ways that get the same answer then that’s great. The questions are designed to get you used to certain concepts so please make sure you have attempted the exercise before looking at the answer, and try tweaking any answers to see how you might answer a similar but different question.</p>
-<p>As a final note, for formatting purposes most dataframe outputs have the following code after it <code>%&gt;% nice_format()</code> to make the output nicer in the html file, you can ignore this, it is just for the purpose of the output document.</p>
+<p>The following are suggested solutions to the exercises given in the training resources. They are not intended to be the <em>best</em> way to do things, by speed or efficiency or even niceness of code, but simpley <em>a</em> way to get the answer. If you find other ways that get the same answer then that’s great. The questions are designed to get you used to certain concepts so please make sure you have attempted the exercise before looking at the answer, and try tweaking any answers to see how you might answer a similar but different question.</p>
+<p>As a final note, for formatting purposes most dataframe outputs have the following custom code after it <code>%&gt;% nice_format()</code> to make the output nicer in the html file, you can ignore this, it is just for the purpose of the output document.</p>
 </div>
 <div id="assignment-and-vectors-exercises" class="section level2">
 <h2>Assignment and Vectors Exercises</h2>
@@ -222,18 +222,20 @@ nums</code></pre>
 </ol>
 <pre class="r"><code>nums**2</code></pre>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
-<p>We do this using the <code>**</code> operator which is the exponent operator. As R is vectorised this acts on all elements of nums.</p>
+<p>We do this using the <code>**</code> operator which is the exponent operator. As R is vectorised this acts on all elements of <code>nums</code>.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>Output just those elements of the vector that are less than or equal to 4</li>
 </ol>
 <pre class="r"><code>nums[nums &lt;= 4]</code></pre>
 <pre><code>## [1] 1 2 3 4</code></pre>
-<p>We are selecting the elements of nums by first generating a logical vector using the <code>nums &lt;= 4</code> statement.</p>
+<p>We are selecting the elements of <code>nums</code> by first generating a logical vector using the <code>nums &lt;= 4</code> statement.</p>
 <ol start="5" style="list-style-type: decimal">
 <li>Produce another vector of the numbers -1 to -10 and store it in <code>neg_nums</code>. Output the sum between elements of the two vectors i.e. the first element of <code>nums</code> + the first element of <code>neg_nums</code> etc</li>
 </ol>
 <pre class="r"><code>neg_nums = -1:-10
-nums + neg_nums</code></pre>
+neg_nums</code></pre>
+<pre><code>##  [1]  -1  -2  -3  -4  -5  -6  -7  -8  -9 -10</code></pre>
+<pre class="r"><code>nums + neg_nums</code></pre>
 <pre><code>##  [1] 0 0 0 0 0 0 0 0 0 0</code></pre>
 <p>We do this by using the same <code>:</code> as before but with negative numbers. We then add the vectors element-wise by just using the <code>+</code> operator.</p>
 </div>
@@ -244,7 +246,7 @@ nums + neg_nums</code></pre>
 </ol>
 <pre class="r"><code>seq(13, 190, 17)</code></pre>
 <pre><code>##  [1]  13  30  47  64  81  98 115 132 149 166 183</code></pre>
-<p>The <code>seq</code> function is the solution to this question.</p>
+<p>The <code>seq</code> function is the solution to this question as it takes a start, an end, and a step argument.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Combine a loop and a conditional statement to cycle through all elements in the vector you just created and print out each value with whether it is even or odd (you may need to google how to find that)</li>
 </ol>
@@ -9832,160 +9834,6 @@ km_per_litre
 <tbody>
 <tr>
 <td style="text-align:right;">
-30.4
-</td>
-<td style="text-align:right;">
-52
-</td>
-<td style="text-align:right;">
-12.9200
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-19.2
-</td>
-<td style="text-align:right;">
-123
-</td>
-<td style="text-align:right;">
-8.1600
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-15.2
-</td>
-<td style="text-align:right;">
-180
-</td>
-<td style="text-align:right;">
-6.4600
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-19.7
-</td>
-<td style="text-align:right;">
-175
-</td>
-<td style="text-align:right;">
-8.3725
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-33.9
-</td>
-<td style="text-align:right;">
-65
-</td>
-<td style="text-align:right;">
-14.4075
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-17.8
-</td>
-<td style="text-align:right;">
-123
-</td>
-<td style="text-align:right;">
-7.5650
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-10.4
-</td>
-<td style="text-align:right;">
-205
-</td>
-<td style="text-align:right;">
-4.4200
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-14.3
-</td>
-<td style="text-align:right;">
-245
-</td>
-<td style="text-align:right;">
-6.0775
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-18.7
-</td>
-<td style="text-align:right;">
-175
-</td>
-<td style="text-align:right;">
-7.9475
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-24.4
-</td>
-<td style="text-align:right;">
-62
-</td>
-<td style="text-align:right;">
-10.3700
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-22.8
-</td>
-<td style="text-align:right;">
-95
-</td>
-<td style="text-align:right;">
-9.6900
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-26.0
-</td>
-<td style="text-align:right;">
-91
-</td>
-<td style="text-align:right;">
-11.0500
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-21.4
-</td>
-<td style="text-align:right;">
-109
-</td>
-<td style="text-align:right;">
-9.0950
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-32.4
-</td>
-<td style="text-align:right;">
-66
-</td>
-<td style="text-align:right;">
-13.7700
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
 21.0
 </td>
 <td style="text-align:right;">
@@ -10004,6 +9852,160 @@ km_per_litre
 </td>
 <td style="text-align:right;">
 4.4200
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+22.8
+</td>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:right;">
+9.6900
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+14.3
+</td>
+<td style="text-align:right;">
+245
+</td>
+<td style="text-align:right;">
+6.0775
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+30.4
+</td>
+<td style="text-align:right;">
+52
+</td>
+<td style="text-align:right;">
+12.9200
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+21.4
+</td>
+<td style="text-align:right;">
+109
+</td>
+<td style="text-align:right;">
+9.0950
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+26.0
+</td>
+<td style="text-align:right;">
+91
+</td>
+<td style="text-align:right;">
+11.0500
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+32.4
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+13.7700
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+17.8
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+7.5650
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13.3
+</td>
+<td style="text-align:right;">
+245
+</td>
+<td style="text-align:right;">
+5.6525
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19.2
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+8.1600
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+33.9
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+14.4075
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+15.8
+</td>
+<td style="text-align:right;">
+264
+</td>
+<td style="text-align:right;">
+6.7150
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19.2
+</td>
+<td style="text-align:right;">
+175
+</td>
+<td style="text-align:right;">
+8.1600
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+15.2
+</td>
+<td style="text-align:right;">
+150
+</td>
+<td style="text-align:right;">
+6.4600
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+21.4
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+9.0950
 </td>
 </tr>
 </tbody>
