@@ -68,7 +68,7 @@ z <- z/5`
   question("What is wrong with the following code?
 `
 cnt <- 1
-while (count != 10){
+while (cnt != 10){
   print(paste('Count is now', cnt))
   cnt <- cnt + 2
 }`",

@@ -60,7 +60,7 @@ We are selecting the elements of `nums` by first generating a logical vector usi
 
 5) Produce another vector of the numbers -1 to -10 and store it in `neg_nums`. Output the sum between elements of the two vectors i.e. the first element of `nums` + the first element of `neg_nums` etc
 ```{r}
-neg_nums = -1:-10
+neg_nums <- -1:-10
 neg_nums
 nums + neg_nums
 ```

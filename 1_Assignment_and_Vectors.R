@@ -25,7 +25,7 @@
 # To start off we will just assign a number to the variable x (store 10 in x)
 
 x <- 10 # Assigning the value 10 to the variable x
-x <- 10 # You can use = rather than <- but it is not recommended as it will cause problems later
+x = 10 # You can use = rather than <- but it is not recommended as it will cause problems later
 
 # To see what x refers to we just run x and it will print out what it is. We can also look at it in the
 # environment window
@@ -35,7 +35,7 @@ x
 X <- 11
 
 # You can also assign a variable using a right assignment operator, although the need to do so is rare
-x -> 5
+5 -> x
 
 # We can do basic arithmetic and either print of store the result
 x <- 10 * 3 # Notice this overwrites our previous x
