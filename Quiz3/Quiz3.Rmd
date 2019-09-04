@@ -62,25 +62,25 @@ df1 %>% mutate(col2 = -col1,
 question("Simon has been asked to find any outliers in each month in the same dataset, we class an outlier as any sale that has a price more than 3 standard deviations away from the mean (in either direction), or has a number of items more than 3 sd away from the mean (in either direction). Which code should he use?",
     answer("`df1 %>% group_by(month) %>% 
 mutate(mn_tp = mean(transaction_price), sd_tp = sd(transaction_price),
-ms_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
+mn_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
 filter(transaction_price < mn_tp - 3*sd_tp | transaction_price > mn_tp + 3*sd_tp |
 number_of_items < mn_ni - 3*sd_ni | number_of_items > mn_ni + 3*sd_ni)
 `", correct = TRUE),
     answer("`df1 %>% group_by(month) %>% 
 summarise(mn_tp = mean(transaction_price), sd_tp = sd(transaction_price),
-ms_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
+mn_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
 filter(transaction_price < mn_tp - 3*sd_tp | transaction_price > mn_tp + 3*sd_tp |
 number_of_items < mn_ni - 3*sd_ni | number_of_items > mn_ni + 3*sd_ni)
 `"),
     answer("`df1 %>% group_by(month) %>% 
 mutate(mn_tp = mean(transaction_price), sd_tp = sd(transaction_price),
-ms_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
+mn_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
 filter(transaction_price < mn_tp - 3*sd_tp , transaction_price > mn_tp + 3*sd_tp ,
 number_of_items < mn_ni - 3*sd_ni , number_of_items > mn_ni + 3*sd_ni)
 `"),
     answer("`df1 %>% group_by(month) %>% 
 summarise(mn_tp = mean(transaction_price), sd_tp = sd(transaction_price),
-ms_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
+mn_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
 filter(transaction_price < mn_tp - 3*sd_tp , transaction_price > mn_tp + 3*sd_tp ,
 number_of_items < mn_ni - 3*sd_ni , number_of_items > mn_ni + 3*sd_ni)
 `"),
