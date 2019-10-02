@@ -130,9 +130,7 @@ diamonds %>%
   geom_point(aes(col = clarity)) +
   facet_grid(color ~ cut, scales = "free") +
   geom_smooth(method = "lm", col = "red") +
-  xlab("Carat (weight of diamond)") +
-  ylab("Price ($)") +
-  ggtitle("Price of different cut and colour of diamond by weight") +
+  labs(x = "Carat (weight of diamond)", y = "Price ($)", title = "Price of different cut and colour of diamond by weight") +
   theme_minimal()
 
 

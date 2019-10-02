@@ -1,6 +1,6 @@
 .rs.restartR()
 #### Libraries ####
-install.packages(c("lubridate", "DataExplorer", "dbplyr", "esquisse", "rpivotTable"))
+#install.packages(c("lubridate", "DataExplorer", "dbplyr", "esquisse", "rpivotTable"))
 
 
 library("dplyr")
