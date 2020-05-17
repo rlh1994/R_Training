@@ -1,6 +1,9 @@
 ---
 title: "R Basics"
-output: learnr::tutorial
+output: 
+  learnr::tutorial:
+    highlight: kate
+    ace_theme: monokai
 runtime: shiny_prerendered
 ---
 
@@ -16,9 +19,11 @@ Some questions to verify that you understand some of the basics of R:
 
 ```{r quiz}
 quiz(
-  question("What is output of the code `
+  question("What is output of the code 
+  ```r
 a <- c(1, 4, 5, 60, 9, 0)
-a[4]`",
+a[4]
+```",
     answer("NA"),
     answer("5"),
     answer("60", correct = TRUE),
@@ -47,12 +52,12 @@ a[4]`",
     random_answer_order = TRUE
   ),
 question("What is the final value of z in the following code?
-`
+```r
 y <- 7
 Y <- 9
 z <- y*10
-z <- z/5`
-",
+z <- z/5
+```",
     answer("90"),
     answer("14", correct = TRUE),
     answer("18"),
@@ -63,19 +68,6 @@ z <- z/5`
     answer("`length()`"),
     answer("`seq()`", correct = TRUE),
     answer("`c()`"),
-    random_answer_order = TRUE
-  ),
-  question("What is wrong with the following code?
-`
-cnt <- 1
-while (cnt != 10){
-  print(paste('Count is now', cnt))
-  cnt <- cnt + 2
-}`",
-    answer("Cnt is spelt wrong, it should be count"),
-    answer("We should use for loop instead"),
-    answer("The loop will never stop", correct = TRUE, message = "Why is this the case?"),
-    answer("Count is capitalised in the sentence but cnt isn't"),
     random_answer_order = TRUE
   )
 )

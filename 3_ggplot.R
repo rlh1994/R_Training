@@ -1,17 +1,18 @@
-.rs.restartR()
-#### Libraries ####
+# Libraries ---------------------------------------------------------------
 library("dplyr")
 library("ggplot2")
 
 
-#### What is the grammer of graphics? ####
+
+# What is the grammer of graphics? ----------------------------------------
 
 # In extremely simple terms, the grammer of graphics is the idea that a graphic is like a language,
 # it can be made up different pieces, the way a sentence is made of nouns, verbs, adjectives etc.
 
 # By the end of this file you'll be able to plot 5 different variables on the same graphic, now let's get started...
 
-#### Elements of a basic graph ####
+
+# Elements of a basic graph -----------------------------------------------
 
 # Let's start by adding our data to the plot
 ggplot(data = diamonds)
@@ -22,7 +23,7 @@ ggplot(data = diamonds)
 # Next we can tell the plot what aestetics to use. This is like picking the nouns of our sentance
 ggplot(data = diamonds, aes(x = carat, y = price))
 
-# We now have some axes, and the ranged are right, but we don't have our data plotted yet.
+# We now have some axes, and the ranges are right, but we don't have our data plotted yet.
 # We haven't told it how to put it all together yet.
 
 # Now we need to add a geom, these are the elements that get actually added to plot (kind of like verbs)
@@ -30,7 +31,7 @@ ggplot(data = diamonds, aes(x = carat, y = price))
 ggplot(data = diamonds, aes(x = carat, y = price)) +
   geom_point()
 
-# There we go! Our data is plotted in 2 lines.
+# There we go! Our data (53,940 data points!) is plotted in 2 lines.
 
 # It's a bit hard to see because there's so many points, let's make them a bit more transparent using the alpha option
 ggplot(data = diamonds, aes(x = carat, y = price)) +
@@ -51,7 +52,23 @@ ggplot(data = diamonds, aes(y = price)) +
   xlab("Dimension")
 
 # But wait the colours aren't what we said???
-# That's because the aestetic just grouped them, we need to add one final option to actually set the colour
+# That's because the aestetic just grouped them by the string value, as if that was a column for the datapoint.
+# This is a very important fact, anything in the aestetic is part of the underlying data, anything outside the aestetic is part of the geom.
+ggplot(data = diamonds, aes(y = price)) +
+  geom_point(aes(x = x), col = 'red') +
+  geom_point(aes(x = z), col = "blue") +
+  xlab("Dimension")
+
+# The problem with that one is there was no legend to tell us which one was which...
+# To get around this we can either accept the default colour choices
+ggplot(data = diamonds, aes(y = price)) +
+  geom_point(aes(x = x, col = 'x')) +
+  geom_point(aes(x = z, col = "z")) +
+  xlab("Dimension")
+
+# Or we can use scale_colour_manual to overwrite the colours.
+# This function takes the values as a named vector (using the =) or in alphabetical order for the colours you want to use,
+# the labels you want to give to those values, and the title you want to give the legend.
 ggplot(data = diamonds, aes(y = price)) +
   geom_point(aes(x = x, col = "xs")) +
   geom_point(aes(x = z, col = "zs")) +
@@ -59,10 +76,11 @@ ggplot(data = diamonds, aes(y = price)) +
   scale_color_manual(values = c("xs" = "red", "zs" = "blue"), labels = c("X", "Z"), name = "Custom legend\ntitle")
 
 # Manually specifying things in ggplot is possible, but usually a bit more complex than letting it do it for you
-# In particular, anything to do with legends tends to be really fiddely.
+# In particular, anything to do with legends tends to be really fiddely. Often you can just stick with the defaults and not have a problem.
 
 
-#### Exercises 1 ####
+# Exercises ---------------------------------------------------------------
+
 
 # 1) Create a scatter plot that visualises how the width ('x') and depth ('z') of diamond varies
 
@@ -85,7 +103,8 @@ ggplot(data = diamonds, aes(y = price)) +
 
 
 
-#### Linear Models ####
+
+# Linear Models -----------------------------------------------------------
 
 # We aren't covering modelling in this training, although R is obviously optimised and desgined for it
 # But how complex is it to add a linear model to a plot?
@@ -102,7 +121,7 @@ diamonds %>%
 # if the model is any good, or what it might suggest, but it's extremely easy to add.
 
 
-#### Facets ####
+# Facets ------------------------------------------------------------------
 
 # Now for something even more incredible, we can easily split our plots out by a variable using 1 line
 diamonds %>%
@@ -123,18 +142,24 @@ diamonds %>%
   facet_grid(color ~ cut, scales = "free")
 
 
-#### The big finale ####
+
+# The big Finale ----------------------------------------------------------
 library(ggthemes)
 diamonds %>%
   ggplot(aes(x = carat, y = price)) +
   geom_point(aes(col = clarity)) +
   facet_grid(color ~ cut, scales = "free") +
   geom_smooth(method = "lm", col = "red") +
-  labs(x = "Carat (weight of diamond)", y = "Price ($)", title = "Price of different cut and colour of diamond by weight") +
-  theme_minimal()
+  labs(x = "Carat (weight of diamond)", y = "Price ($)", title = "Comparison of diamond properties") +
+  theme_wsj()
+
+# Note, just because you *can* plot 5+ different dimensions of your data in a single plot, doesn't mean you should (and often you shouldn't!).
+# There's a big difference between a full visualisation and an effective visualisation. https://graphicsprinciples.github.io/ is a good resource.
 
 
-#### Exercises 2 ####
+
+# Exercises ---------------------------------------------------------------
+
 
 # 1) Make a plot using mtcars of hp vs mpg, colour it by cylinder
 # can you make the cyl discrete? try as.character()
@@ -165,6 +190,8 @@ diamonds %>%
 
 
 
-#### But wait, there's more! ####
+# Useful Links -------------------------------------------------------------
 
 # http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
+# GGplot 2 workshop part 1, by the maintainer of the package https://youtu.be/h29g21z0a68
+

@@ -1,4 +1,3 @@
-.rs.restartR()
 #### Libraries ####
 # install.packages("dplyr")
 # install.packages("ggplot2")
@@ -11,7 +10,8 @@ library("tidylog")
 ?ggplot2
 ?tidylog
 
-#### Diamonds and data exploration ####
+
+# Diamonds and data exploration -------------------------------------------
 
 # Diamonds is a built in dataset that comes with ggplot2. We can find out more about it in the usual way
 ?diamonds
@@ -45,16 +45,21 @@ diamonds$price # This returns the particular column as a pure vector, not a data
 pull(diamonds, price) # Same as above, but useful in certain cases where you cannot $ the dataframe
 diamonds[, "price"] # Notice the difference
 
-diamonds[diamonds$price > 5000, ] # Finally, we can filter our rows in the same way, but in a slightly changed way
+diamonds[diamonds$price > 5000, ] # Finally, we can filter our rows in the same way, just using the learning from above
 
 
-#### Piping ####
+
+# Piping ------------------------------------------------------------------
+
+
 # Before we get into the main functions of dplyr we should discuss one of the most useful tools in all of R, the pipe.
 # The pipe comes originally from the magrittr package and implements a very simple idea.
 # What is on the left of the pipe, is passed as the first argument to the right of the pipe.
 
-# Consider the basic example
+# Consider the basic example of creating some vector then taking it's mean, and printing out text detailing that
+paste(mean(c(1, 2, 3, 4, 5, 6, 7, 10)), 'is the mean of the vector')
 
+# Now instead, see how we do it using the pipe
 c(1, 2, 3, 4, 5, 6, 7, 10) %>%
   mean() %>%
   paste("is the mean of the vector")
@@ -68,14 +73,17 @@ c(1, 2, 3, 4, 5, 6, 7, 10) %>%
   paste("The mean of the vector is", .)
 
 
-#### Selecting, Filtering, and Arranging ####
+
+# Selecting, Filtering, and Arranging -------------------------------------
 
 # Now we have our dataframe and know an easier way to use a chain of functions, let's look at some dplyr functions
-# The first things we might want to so are only look at certain columns of our data (selecting)
+# The first things we might want to do are:
+# Only look at certain columns of our data (selecting)
 # Look at only certain rows of our data (filtering)
 # Order out data in a particular way (arranging)
 
-# Let's start with some examples of select
+# Let's start with some examples of select. R is a very special language in that you can pass arguments to functions without them 
+# having to be strings. If you have never programmed before this won't feel special, but trust me it is a very nice feature to have.
 
 # Select a single column
 diamonds %>%
@@ -139,6 +147,7 @@ diamonds %>%
     carat > 4,
     color == "J"
   ) # Notice the double equals
+
 diamonds %>%
   filter(carat > 4,
     color = "J"
@@ -173,12 +182,14 @@ diamonds %>%
   arrange(desc(price), table)
 
 
-#### Quiz 2 ####
+
+# Quiz --------------------------------------------------------------------
+
 
 rmarkdown::run("Quiz2/Quiz2.Rmd")
 
 
-#### Exercises 1 ####
+# Exercises ---------------------------------------------------------------
 
 # The following exercises use the built-in mtcars dataset. First get familiar with it using the methods
 # described above. Notice that this dataset has rownames rather than just rownumbers.
@@ -208,7 +219,8 @@ rmarkdown::run("Quiz2/Quiz2.Rmd")
 
 
 
-#### Mutating ####
+
+# Mutating ----------------------------------------------------------------
 
 # install.packages("quantmod")
 
@@ -223,7 +235,7 @@ diamonds %>%
     max_volume = x * y * z
   )
 
-# We can also use a column that we JUST created to create another column
+# We can also use a column that we JUST created to create another column, something you can't do in SQL
 diamonds %>%
   mutate(
     kg = carat / 5000,
@@ -252,7 +264,7 @@ diamonds %>%
 exch_rate <- quantmod::getSymbols("GBPUSD=X", from = Sys.Date(), auto.assign = FALSE)
 diamonds %>%
   mutate(price_GBP = price / as.numeric(exch_rate$`GBPUSD=X.Close`))
-# The as.numeric as because the library pulls the data in a specific format.
+# The as.numeric as because the library pulls the data in a specific format, this converts the type
 
 # Finally, we usually want to keep the changed dataframe somewhere so we should assign it to a variable
 diamonds2 <- diamonds %>%
@@ -264,7 +276,8 @@ diamonds2 <- diamonds %>%
   )
 
 
-#### Aggregating ####
+
+# Aggregating -------------------------------------------------------------
 
 # The final common thing we want to do with out data is group it and aggregate it (or get aggregate info)
 # We do this using 2 functions, group_by and summarise
@@ -295,6 +308,7 @@ diamonds %>%
 diamonds %>%
   group_by(cut, color) %>%
   summarise(count_col = n())
+# Notice in this case only 1 level of grouping is dropped, this is important as it means the dataframe is still grouped
 
 # Order is again important, although here it doesn't matter
 # We can generate multiple columns at the same time
@@ -330,7 +344,8 @@ diamonds_grouped2 <-
 is.grouped_df(diamonds_grouped2)
 
 
-#### Exporting and Importing Data ####
+
+# Exporting & Importing Data ----------------------------------------------
 
 # You'll want to bring your own data into R to work with in the future.
 # There are ways to connect directly to databases, read from online sources, or connect APIs
@@ -352,7 +367,8 @@ cars_imported <- read.csv("cars_data.csv")
 # You may also want to look at the readxl package to go straight from excel instead of CSV.
 
 
-#### Putting it all together ####
+
+# Putting it all together -------------------------------------------------
 
 # Let's really use the power of pipes to do many steps in one go
 # Let's go back to our density calculation:
@@ -368,7 +384,7 @@ diamonds %>%
   filter(min_density > 3.51)
 
 # Looks like there's some diamonds data with x or y or z of 0, let's get rid of them
-# It's easy to slide the filter in earlier because of the pipes.
+# It's easy to slide the filter in earlier because of the pipes, without them it would be tricky
 diamonds %>%
   filter(x > 0, y > 0, z > 0) %>%
   mutate(
@@ -400,11 +416,14 @@ diamonds %>%
   )
 
 
-#### Quiz 3 ####
+
+# Quiz --------------------------------------------------------------------
+
 
 rmarkdown::run("Quiz3/Quiz3.Rmd")
 
-#### Exercises 2 ####
+
+# Exercises ---------------------------------------------------------------
 
 # 1) Create a new variable in the mycars dataframe km_per_litre using the mutate() function.
 # Hint: 1 mpg is 0.425 km/l.
