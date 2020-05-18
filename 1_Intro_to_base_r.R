@@ -95,9 +95,9 @@ x[3] + x[4]
 # Functions ---------------------------------------------------------------
 
 # A function can be defined by 3 things:
-# Its arguments, also called inputs
-# What it does
-# Its return value/Output if it has one
+  # Its arguments, also called inputs
+  # What it does
+  # Its return value/Output if it has one
 
 # In R, nearly all functions do not change the inputs in any way. This is known as functional programming, or side-effect free.
 

@@ -1,43 +1,58 @@
-.rs.restartR()
-#### Functions ####
 
-# A function can be defined by 3 things:
-# Its arguments/Inputs
-# What it does
-# Its return value/Output
+# DRY ---------------------------------------------------------------------
 
-# Let's look at a basic function, the mean of a vector of values
-mean # pressing F1 with the cursor on the function (in this case "mean") will load the help
-x <- 1:10
-mean(x) # finding the mean of all the values in the vector of x
+# DRY stands for Don't Repeat Yourself and is a core programming methodology and ethos.
+# The idea is simple, repeating yourself is bad for a number of reasons:
+#   1) People are lazy, why would you write the same things many times when you could just write it once?
+#   2) If you have to change something in your code, wouldn't it be better to change it once and not 10 times?
+#       This would lead to less chance of an error or missing something, and again see point 1 about being lazy.
+#   3) Chances are if you needed something 3 times you're likely to need it more than 3, why not stop repeating yourself early?
+#   4) Seeing the same 10 lines of code over and over makes reading it hard.
 
-# We can see what some of these additional options do:
-mean(x = c(1, 2, 3, 4, 5, 6, NA)) # We can't take the average with a missing value by default
-mean(x = c(1, 2, 3, 4, 5, 6, NA), na.rm = TRUE) # This option removes the NAs during calculation
-mean(x = c(1, 2, 3, 4, 5, 6, NA), trim = 0.1, na.rm = TRUE) # This removes 20% of the values (10% each end)
+# The following session covers ways to avoid repeating yourself in R, either by having to have different files to run
+#   slightly different code, by doing the same thing many times in a row, or by wanting to do the same thing with slightly different inputs.
 
-# Some more functions
-str <- "this is a test string"
-substr(str, 15, 20) # the usual functions you want exist (but note the different variables compared to sql, start and stop not start and length)
-length(x) # length of a vector (number of elements)
-length(str) # Returns 1 why? Because in R everything is a vector, this string is a vector of 1 element
-nchar(str) # use nchar to get the "length" of the string
-seq(from = 1, to = 100, by = 10) # produces a generic sequence
+# There are some cases against DRY (mostly in the case of functions). It can make your code harder to understand as 
+#   details are abstracted away in code defined elsewhere. It can also make debugging your code harder for the same reason.
+#   But overall, this will save you more problems than it creates.
 
-# Finally, not covered in detail is how to create your own functions. This can sometimes come in handy but
-# is not more for reference at this point so don't worry too much about it.
-myfunc <- function(x, y) {
-  z <- 2 * x + y
-  return(z)
+
+# Conditional Execution ---------------------------------------------------
+
+# Something every programming lanaguage has to give you the ability to do is conditionally execute code.
+# We've already seen this in the lesson where we used if_else or case_when, but these are dplyr functions 
+#   that act on records in a dataframe. What if you wanted to only run an entire block of code if a condition is TRUE?
+# That's where if statements come in, they add conditional branches to your code based on some logical test.
+
+# The structure if as follows:
+# if (condition1) {
+#   # run when condition1 is TRUE
+# } else if (condition2) { # can have as many else ifs as you want
+#   # run when condition1 is FALSE, but condition2 is TRUE
+# } else {
+#   # run when none of the other tests are true
+# }
+
+# This isn't a very useful example, but it shows you the core structure of an if/else block and what it does.
+x <- 1:30
+if (length(x) > 20) {
+  print("That's a long vector!")
+} else if (length(x) > 10) {
+  print("That's a decent sized vector.")
+} else {
+  print("Did you even try...")
 }
 
-myfunc(5, 7)
+x <- 1:15
+if (length(x) > 20) {
+  print("That's a long vector!")
+} else if (length(x) > 10) {
+  print("That's a decent sized vector.")
+} else {
+  print("Did you even try...")
+}
 
-
-#### Conditionals ####
-
-# We will see some more useful conditionals later in the lesson, but you will sometimes want to do one thing
-# or another depending on certain conditions. Here's an example in case you ever need it
+x <- 1:5
 if (length(x) > 20) {
   print("That's a long vector!")
 } else if (length(x) > 10) {
@@ -47,18 +62,19 @@ if (length(x) > 20) {
 }
 
 
-#### Loops ####
+# Loops -------------------------------------------------------------------
 
 # Sometimes you want to do the same thing many times, maybe across multiple bits of data?
 # To do this we can use loops, either for loops or while loops.
-# Usually you shouldn't need to use a loop to take an action on a variable, only if you need to do something multiple times
+# Usually because R is vectorised, you shouldn't need to use a loop to take an action on a variable, 
+#   only if you need to do something multiple times.
 
 # A for loop runs through each item in it's vector once, doing whatever is in the loop each time
 for (n in x) {
   print(paste("The loop is currently on", n))
 }
 
-# A while loop keeps going until it's condition is false (it finishes it's current loop)
+# A while loop keeps going until it's condition is false (it finishes the current loop)
 # Make sure your loop will reach that false condition or it will run forever!
 y <- 0
 while (y < 7) {
@@ -67,13 +83,44 @@ while (y < 7) {
 }
 
 
-#### Quiz ####
+# Custom functions --------------------------------------------------------
+
+# Often you may find yourself doing the same thing over and over in the code; you can't do it in a for loop
+#   because each one is slighlty different but similar enough that only a few bits of the process change.
+#   This is when you can define your own function to do the work for you!
+
+# Just like inbuilt functions, they are defined by 3 things
+  # Its arguments, also called inputs
+  # What it does
+  # Its return value/Output if it has one
+
+# A function gets assigned to a variable just like anything else, we define what inputs it has, we write the code inside
+#   the function for what it does, and then we tell it what to return to the user
+
+# This function takes two numbers, x and y and calcualted 2*x + y, stores this in z then returns that value to the user.
+myfunc <- function(x, y) {
+  z <- 2 * x + y
+  return(z)
+}
+
+myfunc(5, 7)
+
+# Notice that z doesn't ever appear in our environment? This is because z only exists within the scope of the function call. This
+#   means that we can never access it outside of that function. R also makes sure that any arguments you pass are copied within that function
+#   so there's no way you can change the value of your inputs (without being very hacky about it).
+func2 <- function(x){
+  x <- x + 5
+}
+
+x <- 5
+x
+func2(x)
+x
+
+# Quiz --------------------------------------------------------------------
 
 
-
-#### Exercises ####
-
-
+# Exercises ---------------------------------------------------------------
 
 
 
