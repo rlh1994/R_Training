@@ -1,12 +1,18 @@
-.rs.restartR()
-#### Libraries ####
-#install.packages(c("lubridate", "DataExplorer", "dbplyr", "esquisse", "rpivotTable"))
+#  /---------------------------------------------------------------------------------\
+#  |   ____                   _       ____                _              __    __    |
+#  |  |  _ \    __ _   _ __  | |_    | ___|   _     ___  | |_   _   _   / _|  / _|   |
+#  |  | |_) |  / _` | | '__| | __|   |___ \  (_)   / __| | __| | | | | | |_  | |_    | 
+#  |  |  __/  | (_| | | |    | |_     ___) |  _    \__ \ | |_  | |_| | |  _| |  _|   |
+#  |  |_|      \__,_| |_|     \__|   |____/  (_)   |___/  \__|  \__,_| |_|   |_|     |
+#  |                                                                                 |  
+#  \---------------------------------------------------------------------------------/
 
-
+# Libraries ---------------------------------------------------------------
 library("dplyr")
 library("ggplot2")
 
-#### DataExplorer ####
+
+# DataExplorer ------------------------------------------------------------
 library("DataExplorer")
 
 # Data explorer is a package designed to make it easier to run common exploratory data analysis (EDA) tasks and graphs
@@ -16,7 +22,7 @@ library("DataExplorer")
 create_report(diamonds)
 
 
-#### Lubridate ####
+# Lubridate ---------------------------------------------------------------
 library("lubridate")
 
 # Lubridate exists to make it easier to work with dates in R. It includes functions to transform dates, manipulate them,
@@ -34,7 +40,7 @@ leap_year(now()) # is it a leap year?
 
 
 
-#### Dbplyr ####
+# Dbplyr ------------------------------------------------------------------
 library("dbplyr")
 
 
@@ -45,7 +51,7 @@ library("dbplyr")
 # Creating a connection to a database can be fiddly and time consuming so the following example is provided to show you what is
 # possible, without the difficulty of actually connecting to a database.
 
-df_oracle <- tbl_lazy(mtcars, src = simulate_oracle()) # generate a dummy table in a dummy database
+df_oracle <- tbl_lazy(mtcars, con = simulate_oracle()) # generate a dummy table in a dummy database
 
 df_oracle %>% 
     filter(mpg > 20) %>% 
@@ -54,9 +60,7 @@ df_oracle %>%
     show_query() # generate the SQL that would be run in the database
 
 
-#### Some flashy packages that are nice but not always useful ####
-
-
+# Some flashy packages that are nice but not always useful ----------------
 library("esquisse")
 
 # esquisse is a Shiny app that allows drag and drop creation of many basic ggplot charts, including

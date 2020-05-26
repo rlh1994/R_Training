@@ -34,56 +34,38 @@ quiz(
   ),
   question("A dataframe, `df1` is created with 1 column (col1) and 5 rows, populated with the numbers 1-5.
 The following code is then run. What are the values in col4?
-`
+```r
 df1 %>% mutate(col2 = -col1,
                 col3 = 2 * col2,
-                col4 = -3 * col3)`",
+                col4 = -3 * col3)
+```",
     answer("6, 12, 18, 24, 30", correct = TRUE),
     answer("-6, -12, -18, -24, -30"),
     answer("5, 10, 15, 20, 25"),
     answer("-5, -10, -15, -20, -25"),
     random_answer_order = TRUE
   ),
-  question("Sarah has a sales dataframe (`df1`) with 5 columns; day_of_week, month, transaction_ID, transaction_price, number_of_items, and wants to find the mean and standard deviation of the average price per item for each transaction, per day and month. Which code should she use?",
-    answer("`df1 %>% group_by(month, day_of_week) %>% 
+  question("Sarah has a sales dataframe (`df1`) with 5 columns; day_of_week, month, transaction_ID, transaction_price, number_of_items. She wants to find the mean and standard deviation of the average price per item in each transaction, per day of the week and month. Which code should she use?",
+    answer("
+    df1 %>% group_by(month, day_of_week) %>% 
            mutate(cost_per_item = transaction_price/number_of_items) %>%
-           summarise(mn = mean(cost_per_item), sd = sd(cost_per_item))`", correct = TRUE),
-    answer("`df1 %>% group_by(month, day_of_week) %>% 
+           summarise(mn = mean(cost_per_item), sd = sd(cost_per_item))
+    ", correct = TRUE),
+    answer("
+    df1 %>% group_by(month, day_of_week) %>% 
            mutate(cost_per_item = transaction_price/number_of_items,
-           mn = mean(cost_per_item), sd = sd(cost_per_item))`"),
-    answer("`df1 %>% group_by(month) %>% group_by(day_of_week) %>% 
+           mn = mean(cost_per_item), sd = sd(cost_per_item))
+    "),
+    answer("
+    df1 %>% group_by(month) %>% group_by(day_of_week) %>% 
            mutate(cost_per_item = transaction_price/number_of_items) %>%
-           summarise(mn = mean(cost_per_item), sd = sd(cost_per_item))`"),
-    answer("`df1 %>% group_by(month) %>% group_by(day_of_week) %>% 
+           summarise(mn = mean(cost_per_item), sd = sd(cost_per_item))
+           "),
+    answer("
+    df1 %>% group_by(month) %>% group_by(day_of_week) %>% 
            mutate(cost_per_item = transaction_price/number_of_items,
-           mn = mean(cost_per_item), sd = sd(cost_per_item))`"),
-    random_answer_order = TRUE
-  ),
-question("Simon has been asked to find any outliers in each month in the same dataset, we class an outlier as any sale that has a price more than 3 standard deviations away from the mean (in either direction), or has a number of items more than 3 sd away from the mean (in either direction). Which code should he use?",
-    answer("`df1 %>% group_by(month) %>% 
-mutate(mn_tp = mean(transaction_price), sd_tp = sd(transaction_price),
-mn_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
-filter(transaction_price < mn_tp - 3*sd_tp | transaction_price > mn_tp + 3*sd_tp |
-number_of_items < mn_ni - 3*sd_ni | number_of_items > mn_ni + 3*sd_ni)
-`", correct = TRUE),
-    answer("`df1 %>% group_by(month) %>% 
-summarise(mn_tp = mean(transaction_price), sd_tp = sd(transaction_price),
-mn_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
-filter(transaction_price < mn_tp - 3*sd_tp | transaction_price > mn_tp + 3*sd_tp |
-number_of_items < mn_ni - 3*sd_ni | number_of_items > mn_ni + 3*sd_ni)
-`"),
-    answer("`df1 %>% group_by(month) %>% 
-mutate(mn_tp = mean(transaction_price), sd_tp = sd(transaction_price),
-mn_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
-filter(transaction_price < mn_tp - 3*sd_tp , transaction_price > mn_tp + 3*sd_tp ,
-number_of_items < mn_ni - 3*sd_ni , number_of_items > mn_ni + 3*sd_ni)
-`"),
-    answer("`df1 %>% group_by(month) %>% 
-summarise(mn_tp = mean(transaction_price), sd_tp = sd(transaction_price),
-mn_ni = mean(number_of_item), sd_ni = sd(number_of_item)) %>%
-filter(transaction_price < mn_tp - 3*sd_tp , transaction_price > mn_tp + 3*sd_tp ,
-number_of_items < mn_ni - 3*sd_ni , number_of_items > mn_ni + 3*sd_ni)
-`"),
+           mn = mean(cost_per_item), sd = sd(cost_per_item))
+    "),
     random_answer_order = TRUE
   )
 )
