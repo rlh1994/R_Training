@@ -98,9 +98,9 @@ while (y < 7) {
 #   This is when you can define your own function to do the work for you!
 
 # Just like inbuilt functions, they are defined by 3 things
-  # Its arguments, also called inputs
-  # What it does
-  # Its return value/Output if it has one
+# Its arguments, also called inputs
+# What it does
+# Its return value/Output if it has one
 
 # A function gets assigned to a variable just like anything else, we define what inputs it has, we write the code inside
 #   the function for what it does, and then we tell it what to return to the user
@@ -128,22 +128,32 @@ x
 # Quiz --------------------------------------------------------------------
 
 
+
 # Exercises ---------------------------------------------------------------
 
-
-
-# 1) Combine a loop and a conditional statement to cycle through all elements in the vector you just created
-# and print out each value with whether it is even or odd (you may need to google how to find that)
-
-
-
-# 2) Use a while loop to print out all the square numbers less than 1061000
+# 1) Use a while loop to print out all the square numbers less than 1061000
 # Bonus to tell me what number squared is the closest but still beneath it
 
 
 
-# Bonus: Use a while loop to generate the Fibonacci numbers less than 1000
+# 2) Create a variable called `year` and assign this year to it. Now use a conditional statement to test if 
+#   it is a leap year (evenly divisible by 4, not evenly divisible by 100 unless it is evenly divisible by 400).
+#   Check this works for other years to ensure it works.
 
 
 
-# Bonus: Create a function that takes a value, n, and returns that Fibonacci number
+# 3) Combine a loop and a conditional statement to cycle through all elements in the vector 1:30 
+#   and print out each value with whether it is even or odd
+
+
+
+# 4) Take your answer from exercise 2 and instead turn it into a function that takes a value for the year,
+#   prints a string telling you if it is a leap year or not, and return TRUE or FALSE
+
+
+
+# 5) Use a while loop to generate the Fibonacci numbers less than 1000
+
+
+
+# 6) Create a function that takes a value, n, and returns that Fibonacci number
