@@ -8,7 +8,6 @@
 #  \---------------------------------------------------------------------------------/
 
 # Libraries ---------------------------------------------------------------
-#install.packages(c("lubridate", "DataExplorer", "dbplyr", "esquisse", "rpivotTable"))
 library("dplyr")
 library("ggplot2")
 

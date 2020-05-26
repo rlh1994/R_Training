@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
 library(ggplot2)
 library(kableExtra)
+library(glue)
 
 nice_format <- function(df) {
   df %>% kable() %>%
@@ -20,21 +21,18 @@ scroll_box(width = "100%", height = "400px")
 }
 ```
 
-## Intro
+## Intro Exercises
 The following are suggested solutions to the exercises given in the training resources. They are not intended to be the *best* way to do things, by speed or efficiency or even niceness of code, but simply *a* way to get the answer. If you find other ways that get the same answer then that's great. The questions are designed to get you used to certain concepts so please make sure you have attempted the exercise before looking at the answer, and try tweaking any answers to see how you might answer a similar but different question.  
 
 As a final note, for formatting purposes most dataframe outputs have the following custom code after it `%>% nice_format()` to make the output nicer in the html file, you can ignore this, it is just for the purpose of the output document.
 
-
-## Assignment and Vectors Exercises
-
-1) Assign the name of the person to your left to a variable called `left`, and the same for `right`.
+1) Assign your job title to a variable called `job_title`, and assign your boss' name to a variable called `boss`
 ```{r}
-left <- 'Rachel'
-right <- 'Ross'
+job_title <- 'Innovation Manager'
+boss <- "David Borthwick"
 ```
 
-We do this using the `<-` assignment operator.
+We do this using the `<-` assignment operator, and specify strings using either a single or double quote.
 
 2) Create a vector of the numbers 1 to 10 and store it in a variable called `nums`
 ```{r}
@@ -44,7 +42,7 @@ nums
 
 We do this using `:` to produce a sequenced vector from 1 to 10
 
-3) Take that vector and output the square of each number
+3) Take that vector and output the square of each number in it
 ```{r}
 nums**2
 ```
@@ -67,128 +65,30 @@ nums + neg_nums
 
 We do this by using the same `:` as before but with negative numbers. We then add the vectors element-wise by just using the `+` operator.
 
-## Function, Conditions, and Loops Exercises
-
-1) Generate a vector of numbers, starting at 13, ending at 190, in steps of 17.
+6) Generate a vector of numbers, starting at 13, ending at 190, in steps of 17.
 ```{r}
 seq(13, 190, 17)
 ```
 
 The `seq` function is the solution to this question as it takes a start, an end, and a step argument.
 
-2) Combine a loop and a conditional statement to cycle through all elements in the vector you just created and print out each value with whether it is even or odd (you may need to google how to find that)
+7) Using Google (or another search engine), find a function to generate random values from a normal distribution. Assign to a variable 100,000 randomly generated normally distributed values. What is their mean and what is their standard deviation (another function to look up)?
 ```{r}
-for (i in seq(13, 190, 17)){
-  if (i %% 2 == 0) print('Even')
-  else  print('Odd')
-}
+random_numbers <- rnorm(100000)
+mean(random_numbers)
+sd(random_numbers)
 ```
 
-The `for` loop executes its code for every element in our sequence which gets assigned to `i` one at a time. Each time round we check if `i` divided by 2 has a remainder (`%%`) of 0, if it does then we return Even, otherwise we return Odd.
+`rnorm` is the function that generates random numbers from a normal distribution. We would get different values each time we ran this, we can use the `set.seed()` function to set the random seed that we pick from if we need it to be reproducible. By default `rnorm` picks from a distribution with a mean of 0 and a standard deviation of 1.
 
-3) Use a `while` loop to print out all the square numbers less than 1061000  
-Bonus to tell me what number squared is the closest but still beneath it
-```{r, eval = FALSE}
-x <- 1
-while (x**2 < 1061000){
-  print(x**2)
-  x <- x + 1
-}
-x - 1
-```
-```{r echo=FALSE}
-x <- 1
-sqrs <- c()
-while (x**2 < 1061000){
-  sqrs <- c(sqrs, x**2)
-  x <- x + 1
-}
-sqrs %>% nice_format()
-x - 1
-```
-
-We use a `while` loop until the value of `x` squared is greater than 1061000. At this point `x` has been increased by 1 too many so we print 1 less than `x`.
-
-4) R has a `mean` and a `median` function but no `mode` function, create/find one using google but make sure to try and understand how it works!
+8) From your answer to question 7, access just the 8th, 9412nd, and 12399th elements of that vector.
 ```{r}
-Mode <- function(x) {
-  ux <- unique(x)
-  ux[which.max(tabulate(match(x, ux)))]
-}
+random_numbers[c(8, 9412, 12399)]
 ```
 
-This one is a bit more complex. Let's examine each step individually
-```{r}
-x <- c(5, 4, 5, 4, 9, 0, 0, 8, 1)
-ux <- unique(x)
-ux
-match(x, ux)
-tabulate(match(x, ux))
-which.max(tabulate(match(x, ux)))
-ux[which.max(tabulate(match(x, ux)))]
+We can access many elements of a vector at the same time by passing a vector as the selection criteria.
 
-```
-
-So `ux` is just a unique list of our elements in `x`.  
-`match(x, ux)` gives us a vector that for each element in `x` the position in `ux`.  
-`tabulate(match(x, ux))` gives us a vector of the count of each number in the previous result, so there are 2 1s, 2 2s, 1 3 etc.  
-`which.max(tabulate(match(x, ux)))` returns the position of the *first* maximum value in its argument. In this case position 1.  
-`ux[which.max(tabulate(match(x, ux)))]` then gives us that element of `ux` which is our mode!  
-
-Bonus: Use a while loop to generate the Fibonacci numbers less than 1000
-```{r}
-x <- 1
-y <- 1
-n <- 2
-while (x < 1000){
-  print(paste("The", n,"th Fibonacci number is", x))
-  z <- x
-  x <- x + y
-  y <- z
-  n <- n + 1
-}
-```
-
-The Fibonacci sequence is defined as F(1) = F(2) = 1 and F(n) = F(n-1) + F(n-2). So we initialise `x` and `y` as F(1) and F(2), and n = 2. So, to calculate F(3) we need to add F(2) and F(1). We store F(2) in `z` temporarily, store F(3) in `x` and then store F(2) in `y`, and finally increment `n`. We can then keep doing this until `x` which is F(n) is greater than 1000.
-
-Bonus: Create a `function` that takes a value, `n`, and returns that Fibonacci number
-```{r}
-# Recursive method
-fibo_rec <- function(n) {
-  if (n == 2 | n == 1) return(1)
-  else return(fibo_rec(n-1) + fibo_rec(n-2))
-}
-
-# Iterative method
-fibo_iter <- function(n) {
-  if (n == 2 | n == 1) return(1)
-  else{
-    x <- 1
-    y <- 1
-    i <- 2
-    while (i < n){
-      z <- x
-      x <- x + y
-      y <- z
-      i <- i + 1
-    }
-  return(x)
-  }
-}
-
-
-# Check they work
-for(i in 1:20){
-  print(paste(fibo_rec(i), fibo_iter(i)))
-}
-```
-
-There's 2 basic ways to calculate the nth Fibonacci number (without doing dynamic programming) that is pretty much either work up or work down. The first method works down, starting with the definition of F(n) = F(n-1) + F(n-2) until it hits one of the base cases, calling itself until it gets to a base case. This is known as recursion and will not be covered here but many resources are available on the topic.
-
-The second method works up, using the same approach as above but with a check on the counter rather than the result this time.
-
-
-## `Dplyr` Exercises 1 ##
+## `Dplyr` Exercises 1
 
 The following exercises use the built-in `mtcars` dataset. First get familiar with it using the methods described above. Notice that this dataset has rownames rather than just rownumbers.
 ```{r}
@@ -231,7 +131,7 @@ mycars %>% nice_format()
 
 Remembering we can rename columns in a `select` makes this easy!
 
-5) To practice piping, create a dataftame that shows the mpg, wt and gear of all cars with a qsec between the mean and the 3rd quartile of the original `mtcars` data, putting the heaviest cars first
+5) To practice piping, create a dataframe that shows the mpg, wt and gear of all cars with a qsec between the mean and the 3rd quartile of the original `mtcars` data, putting the heaviest cars first
 ```{r}
 # We can do it using the specific values given to us in the summary output above
 mtcars %>% 
@@ -317,7 +217,7 @@ mtcars %>%
 Similar to the last question.
 
 Bonus: From `mtcars`, by brand of car (first word before the space in the row names) and cylinder, what is the average and max mpg and hp?  
-hint: you will need to google how to get the part of the string you want. If you cannot find it, use this link (but ask, it's important to know how to google questions correctly!) https://stackoverflow.com/questions/15895050/
+hint: you will need to Google how to get the part of the string you want. If you cannot find it, use this link (but ask, it's important to know how to Google questions correctly!) https://stackoverflow.com/questions/15895050/
 ```{r}
 # Many ways to do this, here is one option that I like
 mtcars %>%
@@ -384,6 +284,17 @@ diamonds %>%
 
 Labels are *always* important, otherwise your data means nothing.
 
+6) Run the following lines of code to get a new dataset, there is something hidden in this data, can you find it?
+```{r}
+source("Image_Challenge/produceImageData.R")
+challenge_data <- make_challenge_data()
+
+challenge_data %>% ggplot(aes(x = x,  y = y)) + 
+  geom_point(alpha = 0.05)
+```
+
+By using the `alpha` argument we can find that there is a bird hidden underneath this image!
+
 ## GGplot Exercises 2
 
 1) Make a plot using mtcars of hp vs mpg, colour it by cylinder.  
@@ -406,7 +317,7 @@ mtcars %>%
 
 By adding `facet_wrap` we get 3 different plots now and can examine them separately.
 
-3) Load the `iris` datasdet and examine it. Plot Sepal length vs petal length
+3) Load the `iris` dataset and examine it. Plot Sepal length vs petal length
 ```{r}
 #?iris
 str(iris)
@@ -451,3 +362,127 @@ nycflights13::flights %>%
 ```
 
 There's a lot of new stuff here. we use `as.factor()` to convert out month column to a factor rather than a number so that the colours and distinct, and also so the axis displays all values rather than in-between values. We use `fill` rather than `col` as we want to, unsurprisingly, fill the box not colour it. Then we use `geom_boxplot` to make a boxplot, the same way we did a scatter plot.
+
+## Functions conditionals and Loops Exercises
+
+1) Use a `while` loop to print out all the square numbers less than 1061000  
+Bonus to tell me what number squared is the closest but still beneath it
+```{r, eval = FALSE}
+x <- 1
+while (x**2 < 1061000){
+  print(x**2)
+  x <- x + 1
+}
+x - 1
+```
+```{r echo=FALSE}
+x <- 1
+sqrs <- c()
+while (x**2 < 1061000){
+  sqrs <- c(sqrs, x**2)
+  x <- x + 1
+}
+sqrs %>% nice_format()
+x - 1
+```
+
+We use a `while` loop until the value of `x` squared is greater than 1061000. At this point `x` has been increased by 1 too many so we print 1 less than `x`.
+
+2) Create a variable called `year` and assign this year to it. Now use a conditional statement to test if it is a leap year (evenly divisible by 4, not evenly divisible by 100 unless it is evenly divisible by 400). Check this works for other years to ensure it works.
+```{r}
+year <-2020
+if (year %% 4 == 0 & (!(year %% 100 == 0) | year %% 400 == 0)){
+  print(glue('{year} is a leap year.'))
+} else print(glue('{year} is not a leap year.'))
+
+```
+
+Here we use the `%%` operator which is known as modulo, which returns the remainder of the division between the LHS and RHS; so we use this to check if year is exactly divisible by 4, 100, and 400 (as the remainder is zero). We combine the logic using `&` for and, `|` for or, `!` for not. So we ask if it is divisible by 4 AND (not (divisible by 100) or divisible by 400) then it is a leap year.  
+
+The `glue` function from the package for the same name is a useful trick to be able to run `r` code within a string which can save using the `paste` function and make teh code more concise. Notice also we can use the `else` on a single line so we don't need the curly brackets.
+
+2) Combine a loop and a conditional statement to cycle through all elements in the vector 1:30 and print out each value with whether it is even or odd.
+```{r}
+for (i in seq(13, 190, 17)){
+  if (i %% 2 == 0) print('Even')
+  else  print('Odd')
+}
+```
+
+The `for` loop executes its code for every element in our sequence which gets assigned to `i` one at a time. Each time round we check if `i` divided by 2 has a remainder (`%%`) of 0, if it does then we return Even, otherwise we return Odd.
+
+
+
+4) Take your answer from exercise 2 and instead turn it into a function that takes a value for the year, prints a string telling you if it is a leap year or not, and return TRUE or FALSE
+
+```{r}
+is_leap_year <- function(year){
+  if (year %% 4 == 0 & (!(year %% 100 == 0) | year %% 400 == 0)){
+    print(glue('{year} is a leap year.'))
+    return(TRUE)
+  } else {
+    print(glue('{year} is not a leap year.'))
+    return(FALSE)
+  }
+}
+
+is_leap_year(2020)
+is_leap_year(2019)
+is_leap_year(2000)
+is_leap_year(2100)
+```
+
+Just adapating the above answer, wrapping it into a function creation, and adding the return functions.
+
+5) Use a while loop to generate the Fibonacci numbers less than 1000
+```{r}
+x <- 1
+y <- 1
+n <- 2
+while (x < 1000){
+  print(paste("The", n,"th Fibonacci number is", x))
+  z <- x
+  x <- x + y
+  y <- z
+  n <- n + 1
+}
+```
+
+The Fibonacci sequence is defined as F(1) = F(2) = 1 and F(n) = F(n-1) + F(n-2). So we initialise `x` and `y` as F(1) and F(2), and n = 2. So, to calculate F(3) we need to add F(2) and F(1). We store F(2) in `z` temporarily, store F(3) in `x` and then store F(2) in `y`, and finally increment `n`. We can then keep doing this until `x` which is F(n) is greater than 1000.
+
+6) Create a function that takes a value, n, and returns that Fibonacci number
+```{r}
+# Recursive method
+fibo_rec <- function(n) {
+  if (n == 2 | n == 1) return(1)
+  else return(fibo_rec(n-1) + fibo_rec(n-2))
+}
+
+# Iterative method
+fibo_iter <- function(n) {
+  if (n == 2 | n == 1) return(1)
+  else{
+    x <- 1
+    y <- 1
+    i <- 2
+    while (i < n){
+      z <- x
+      x <- x + y
+      y <- z
+      i <- i + 1
+    }
+  return(x)
+  }
+}
+
+
+# Check they work
+for(i in 1:20){
+  print(paste(fibo_rec(i), fibo_iter(i)))
+}
+```
+
+There's 2 basic ways to calculate the nth Fibonacci number (without doing dynamic programming) that is pretty much either work up or work down. The first method works down, starting with the definition of F(n) = F(n-1) + F(n-2) until it hits one of the base cases, calling itself until it gets to a base case. This is known as recursion and will not be covered here but many resources are available on the topic.
+
+The second method works up, using the same approach as above but with a check on the counter rather than the result this time.
+

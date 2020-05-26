@@ -6,13 +6,7 @@
 #  |  |_|      \__,_| |_|     \__|   |_| (_)   |_| |_| |_|  \__| |_|     \___/   |
 #  |                                                                             |
 #  \-----------------------------------------------------------------------------/
-                                                                                    
-
-# install.packages("rmarkdown")
-# install.packages("learnr")
-# install.packages("shiny")
-
-
+                                                                                  
 
 # RStudio -----------------------------------------------------------------
 
@@ -145,7 +139,7 @@ rmarkdown::run("Quiz1/Quiz1.Rmd")
 
 
 # Exercises ---------------------------------------------------------------
-# 1) Assign your job title to a variable called job_title, and assign your boss' name to a vairable called boss
+# 1) Assign your job title to a variable called job_title, and assign your boss' name to a variable called boss
 
 
 
@@ -173,3 +167,9 @@ rmarkdown::run("Quiz1/Quiz1.Rmd")
 # 7) Using Google (or another search engine), find a function to generate random values from a normal
 #     distribution. Assign to a variable 100,000 randomly generated normally distributed values. What is their mean 
 #     and what is their standard deviation (another function to look up)?
+
+
+
+# 8) From your answer to question 7, access just the 8th, 9412nd, and 12399th elements of that vector.
+
+

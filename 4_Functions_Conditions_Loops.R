@@ -132,18 +132,13 @@ x
 
 
 
-# 2) Combine a loop and a conditional statement to cycle through all elements in the vector you just created
+# 1) Combine a loop and a conditional statement to cycle through all elements in the vector you just created
 # and print out each value with whether it is even or odd (you may need to google how to find that)
 
 
 
-# 3) Use a while loop to print out all the square numbers less than 1061000
+# 2) Use a while loop to print out all the square numbers less than 1061000
 # Bonus to tell me what number squared is the closest but still beneath it
-
-
-
-# 4) R has a mean and a median function but no mode function, create/find one using google but make sure to try and
-# understand how it works!
 
 
 

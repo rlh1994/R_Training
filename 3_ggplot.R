@@ -110,7 +110,9 @@ ggplot(data = diamonds, aes(y = price)) +
 # 5) Label your axis using xlab() and ylab(), and add a title using ggtitle()
 
 
-
+# 6) Run the following lines of code to get a new dataset, there is something hidden in this data, can you find it?
+source("Image_Challenge/produceImageData.R")
+challenge_data <- make_challenge_data()
 
 
 # Linear Models -----------------------------------------------------------

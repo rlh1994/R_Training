@@ -8,9 +8,6 @@
 #  \----------------------------------------------------------------------------------/
 
 #### Libraries ####
-# install.packages("dplyr")
-# install.packages("ggplot2")
-# install.packages("tidylog")
 library("dplyr")
 library("ggplot2")
 library("tidylog")
@@ -428,7 +425,7 @@ diamonds %>%
 
 # Quiz --------------------------------------------------------------------
 
-
+  
 rmarkdown::run("Quiz3/Quiz3.Rmd")
 
 

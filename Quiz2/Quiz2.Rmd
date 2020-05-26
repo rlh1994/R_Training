@@ -45,17 +45,27 @@ quiz(
     random_answer_order = TRUE
   ),
   
-  question("If I asked you to find me all the diamonds of clarity VVS1, with price less than $500, ordered by carat, giving me only the carat, cut, and depth (named deepness), which of the following codes would you use?",
-    answer("`diamonds %>% filter(clarity == 'VVS1', price < 500) %>% 
-           arrange(desc(carat)) %>% select(carat, cut, deepness = depth)`"),
-    answer("`diamonds %>% filter(clarity = 'VVS1', price < 500) %>% 
-           arrange(carat) %>% select(carat, cut, deepness = depth)`"),
-    answer("`diamonds %>% filter(clarity == 'VVS1' | price < 500) %>% 
-           arrange(carat) %>% select(carat, cut, deepness = depth)`"),
-    answer("`diamonds %>% filter(clarity == 'VVS1', price < 500) %>% 
-           arrange(carat) %>% select(carat, cut, deepness = depth)`", correct = TRUE),
-    answer("`diamonds %>% filter(clarity == 'VVS1', price < 500) %>% 
-           arrange(carat) %>% select(carat, cut, depth = deepness)`"),
+  question("If I asked you to find me all the diamonds of clarity VVS1, with price less than $500, ordered by carat, giving me only the carat, cut, and depth which of the following codes will not error??",
+    answer("
+    diamonds %>% filter(clarity == 'VVS1', price < 500) %>% 
+           arrange(desc(carat)) %>% select(carat, cut, depth)
+",
+    answer("
+    diamonds %>% select(carat, cut, depth) %>% 
+    filter(clarity = 'VVS1', price < 500) %>% arrange(carat)
+    "),
+    answer("
+    diamonds %>% filter(clarity == 'VVS1' price < 500) %>% 
+           arrange(carat) %>% select(carat, cut, depth)
+           "),
+    answer("
+    diamonds %>% filter(clarity == 'VVS1', price < 500) %>% 
+           arrange(carat) %>% select(carat, cut, depth)
+           ", correct = TRUE)),
+    answer("
+    diamonds %>% filter(clarity == 'VVS1', price < 500) %>% 
+           carat %>% arrange() %>% select(carat, cut, depth = deepness)
+    "),
     random_answer_order = TRUE
   )
 )
