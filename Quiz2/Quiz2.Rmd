@@ -49,7 +49,7 @@ quiz(
     answer("
     diamonds %>% filter(clarity == 'VVS1', price < 500) %>% 
            arrange(desc(carat)) %>% select(carat, cut, depth)
-",
+"),
     answer("
     diamonds %>% select(carat, cut, depth) %>% 
     filter(clarity = 'VVS1', price < 500) %>% arrange(carat)
@@ -61,7 +61,7 @@ quiz(
     answer("
     diamonds %>% filter(clarity == 'VVS1', price < 500) %>% 
            arrange(carat) %>% select(carat, cut, depth)
-           ", correct = TRUE)),
+           ", correct = TRUE),
     answer("
     diamonds %>% filter(clarity == 'VVS1', price < 500) %>% 
            carat %>% arrange() %>% select(carat, cut, depth = deepness)
@@ -69,5 +69,6 @@ quiz(
     random_answer_order = TRUE
   )
 )
+
 ```
 
