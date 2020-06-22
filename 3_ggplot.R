@@ -205,4 +205,4 @@ diamonds %>%
 
 # http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
 # GGplot 2 workshop part 1, by the maintainer of the package https://youtu.be/h29g21z0a68
-
+# Fundamentals of Data Visualization - https://serialmentor.com/dataviz/
