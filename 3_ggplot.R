@@ -181,8 +181,8 @@ diamonds %>%
 
 
 
-# 3) Load the iris datasdet and examine it. Plot Sepal length vs petal length
-
+# 3) Load the penguins datasdet and examine it. Plot bill length vs flipper length
+library(palmerpenguins)
 
 
 # 4) Now colour it by the species

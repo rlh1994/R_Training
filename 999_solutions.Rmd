@@ -317,15 +317,17 @@ mtcars %>%
 
 By adding `facet_wrap` we get 3 different plots now and can examine them separately.
 
-3) Load the `iris` dataset and examine it. Plot Sepal length vs petal length
+3) Load the `penguins` datasdet and examine it. Plot bill length vs flipper length
 ```{r}
-#?iris
-str(iris)
-head(iris) %>% nice_format()
-summary(iris)
+library(palmerpenguins)
+#?penguins
 
-iris %>% 
-  ggplot(aes(x = Sepal.Length, y = Petal.Length)) +
+str(penguins)
+head(penguins) %>% nice_format()
+summary(penguins)
+
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = flipper_length_mm)) +
   geom_point()
 ```
 
@@ -333,9 +335,9 @@ Our usual basic plot.
 
 4) Now colour it by the species
 ```{r}
-iris %>% 
-  ggplot(aes(x = Sepal.Length, y = Petal.Length, col = Species)) +
-  geom_point() 
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = flipper_length_mm, col = species)) +
+  geom_point()
 ```
 
 Same as before.
@@ -343,10 +345,10 @@ Same as before.
 5) Now split them out using facets and create a line of best fit for each (think about your scales)  
 Which species seem to follow a linear trend?
 ```{r}
-iris %>% 
-  ggplot(aes(x = Sepal.Length, y = Petal.Length)) +
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = flipper_length_mm)) +
   geom_point() +
-  facet_wrap(~Species, scales = 'free') +
+  facet_wrap(~species, scales = 'free') +
   geom_smooth(method = 'lm')
 ```
 
@@ -358,10 +360,10 @@ Hint: boxplot only NEEDS a y value
 nycflights13::flights %>%
   ggplot(aes(x = as.factor(month), y = arr_delay, group = month, fill = as.factor(month))) +
   geom_boxplot() +
-  ylim(c(-20, 20))
+  coord_cartesian(ylim = c(-20, 20))
 ```
 
-There's a lot of new stuff here. we use `as.factor()` to convert out month column to a factor rather than a number so that the colours and distinct, and also so the axis displays all values rather than in-between values. We use `fill` rather than `col` as we want to, unsurprisingly, fill the box not colour it. Then we use `geom_boxplot` to make a boxplot, the same way we did a scatter plot.
+There's a lot of new stuff here. we use `as.factor()` to convert out month column to a factor rather than a number so that the colours and distinct, and also so the axis displays all values rather than in-between values. We use `fill` rather than `col` as we want to, unsurprisingly, fill the box not colour it. Then we use `geom_boxplot` to make a boxplot, the same way we did a scatter plot. We use `coord_cartesian()` and not `ylim()` as you may see elsewhere as `ylim` is processed before the statistic, `coord_cartesian` is processed after and just crops your view in the chart. Refer back to the grammer of grahpics hierarchy to understand this better. Try it with `ylim` instead and notice the different statistical summaries and results you see.
 
 ## Functions conditionals and Loops Exercises
 

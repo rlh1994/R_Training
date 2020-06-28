@@ -13,4 +13,8 @@ install.packages("shiny")
 install.packages("dplyr")
 install.packages("ggplot2")
 install.packages("tidylog")
-install.packages(c("lubridate", "DataExplorer", "dbplyr", "esquisse", "rpivotTable"))
+install.packages(c("lubridate", "DataExplorer", "dbplyr",
+                   "esquisse", "rpivotTable",
+                   "ggthemes", "quantmod"))
+
+remotes::install_github("allisonhorst/palmerpenguins")

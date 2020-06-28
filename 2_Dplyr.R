@@ -228,8 +228,6 @@ rmarkdown::run("Quiz2/Quiz2.Rmd")
 
 # Mutating ----------------------------------------------------------------
 
-# install.packages("quantmod")
-
 # If you want to add new columns based on a calculation, or change a column, you can use the mutate function
 diamonds %>%
   mutate(kg = carat / 5000)
