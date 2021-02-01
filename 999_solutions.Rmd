@@ -352,7 +352,7 @@ penguins %>%
   geom_smooth(method = 'lm')
 ```
 
-Adding `scales = 'free'` is important as the different species have quite different data ranges and this makes it easier for us to view them. We easily added a linear model per species in one line. Both versicolor and virginica seems to follow a linear trend, with the latter following it more closely.
+Adding `scales = 'free'` is important as the different species have quite different data ranges and this makes it easier for us to view them. We easily added a linear model per species in one line. Both Adelie and Chinstrap don't seems to follow a linear trend, but Gentoo follows it a bit better.
 
 6) Use the `nycflights13::flights` dataset and see if you can work out how to create a boxplot of arrival delay, by month, setting the y axis limits to between -20 and 20  
 Hint: boxplot only NEEDS a y value
