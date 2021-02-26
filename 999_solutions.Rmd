@@ -403,9 +403,9 @@ Here we use the `%%` operator which is known as modulo, which returns the remain
 
 The `glue` function from the package for the same name is a useful trick to be able to run `r` code within a string which can save using the `paste` function and make teh code more concise. Notice also we can use the `else` on a single line so we don't need the curly brackets.
 
-2) Combine a loop and a conditional statement to cycle through all elements in the vector 1:30 and print out each value with whether it is even or odd.
+3) Combine a loop and a conditional statement to cycle through all elements in the vector 1:30 and print out each value with whether it is even or odd.
 ```{r}
-for (i in seq(13, 190, 17)){
+for (i in 1:30){
   if (i %% 2 == 0) print('Even')
   else  print('Odd')
 }
